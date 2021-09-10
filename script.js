@@ -105,26 +105,52 @@ function createBoard(){
 }
 
 function checkWin() {
+    //this is also wrong
    winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
-        e.forEach(function(i) {
-           if (p1Array.includes(i)) {
-            num1++;
-            }
-            if (num1 >= 4 && won === false) {      
-                messageEl.innerText = "Congratulations Player 1! You win."
-                won = true;
-            }
-            if (p2Array.includes(i)) {
-                num2++;
-            }
-            if (num2 >= 4 && won === false) {
-                messageEl.innerText = "Congratulations Player 2! You win."
-                won = true;
-            }
+    for (let i = 0;i<winningArray.length; i++) {
+        if (e.includes(p1Array[i])&&!p1Array.includes(p1Array[i])) {
+            num1++
+        }
+        if (e.includes(p2Array[i])&&p2Array.includes(p2Array[i])) {
+            num2++
+        }
+        if (num1 >= 4 && won === false) {      
+        messageEl.innerText = "Congratulations Player 1! You win."
+        won = true;
+        console.log("p1 "+p1Array);
+        console.log("p2 "+p2Array);
+
+        }
+        if (num2 >= 4 && won === false) {      
+        messageEl.innerText = "Congratulations Player 2! You win."
+        won = true;
+        console.log("p2 "+p2Array);
+        console.log("p1 "+p1Array);
+
+        }
+    }
+    //this is wrong
+    //     e.forEach(function(i) {
+    //         if (p1Array.includes(i)) {
+    //         num1++;
+    //         }
+    //         if (num1 >= 4 && won === false) {      
+    //             messageEl.innerText = "Congratulations Player 1! You win."
+    //             won = true;
+    //             console.log(p1Array);
+    //         }
+    //         if (p2Array.includes(i)) {
+    //             num2++;
+    //         }
+    //         if (num2 >= 4 && won === false) {
+    //             messageEl.innerText = "Congratulations Player 2! You win."
+    //             won = true;
+    //             console.log(p2Array);
+    //         }
         
-       });
+    //    });
        num1 = 0;
        num2 = 0;
    });
