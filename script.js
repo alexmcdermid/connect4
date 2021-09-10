@@ -70,7 +70,6 @@ function hoverSquare(){
                 }
             }
         });
-    
 }
 
 // createBoard function fills boardArray with circle data all set to 0
