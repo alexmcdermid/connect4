@@ -1,6 +1,5 @@
 # connect4 webapp
 ## branches: main or ghpages
-test123
 ## Pseudocode:
 ### Create datatype for what is in each slot
 * 2d array in javascript would work quite well. 
