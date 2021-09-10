@@ -3,6 +3,7 @@ let board = document.querySelector(".board");
 let squares = document.querySelectorAll(".board div");
 let playerTurn = 1;
 let playerTurnEl = document.querySelector("h1");
+let messageEl = document.querySelector(".message");
 let currentClick = null;
 let toFill = null;
 let p1Array = [];
@@ -56,8 +57,6 @@ function clickSquare() {
 //todo update 
 function hoverSquare(){
     let hover = parseInt(this.dataset.id);
-    console.log(this.dataset.id);
-  
         squares.forEach(function(e) {
             if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
                 if(e.getAttribute('data-id') == hover) {
@@ -94,10 +93,7 @@ function createBoard(){
     });
     playerTurn = 1;
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
-    console.log(boardArray);
-    
-
-
+    messageEl.innerText = "";
 
     //create board
     for(let i=0;i<42;i++){ 
@@ -105,7 +101,6 @@ function createBoard(){
     let boardItem = [0];
     boardArray.push(boardItem);
     } 
-    console.log(boardArray);
 }
 
 function checkWin() {
@@ -116,14 +111,14 @@ function checkWin() {
            if (p1Array.includes(i)) {
             num1++;
             }
-            if (num1 >= 4) {               
-                alert("p1 win")
+            if (num1 >= 4) {      
+                messageEl.innerText = "Congratulations Player 1! You win."
             }
             if (p2Array.includes(i)) {
                 num2++;
             }
             if (num2 >= 4) {
-                alert("p2 win")
+                messageEl.innerText = "Congratulations Player 2! You win."
             }
         
        });
