@@ -77,13 +77,13 @@ function createBoard(){
 
     //reset board
     while(boardArray.length>1) {
-        boardArray.pop(boardArray.length-1);
+        boardArray.pop();
     }
     while(p1Array.length>1) {
-        p1Array.pop(p1Array.length-1);
+        p1Array.pop();
     }
     while(p2Array.length>1) {
-        p2Array.pop(p2Array.length-1);
+        p2Array.pop();
     }
     squares.forEach(function(e) {
         if (e.classList.contains("p1")||e.classList.contains("p2")) {
@@ -124,7 +124,7 @@ function checkWin() {
     let num1 = 0;
     let num2 = 0;
     for (let i = 0;i<winningArray.length; i++) {
-        if (e.includes(p1Array[i])&&p1Array.includes(p1Array[i])) {
+        if (e.includes(p1Array[i])) {
             num1++
         }
         if (num1 >= 4 && won === false) {      
@@ -135,7 +135,7 @@ function checkWin() {
     
             }
 
-        if (e.includes(p2Array[i])&&p2Array.includes(p2Array[i])) {
+        if (e.includes(p2Array[i])) {
             num2++
         }
         
@@ -312,9 +312,9 @@ function update() {
     }
 
     //adding filled items to winning array for each player
-    if (playerTurn == 1) {
+    if (playerTurn == 1&&!p1Array.includes(toFill)) {
         p1Array.push(toFill);
-    } else if (playerTurn == 2) {
+    } else if (playerTurn == 2&&!p2Array.includes(toFill)) {
         p2Array.push(toFill);
     }
 
