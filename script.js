@@ -51,20 +51,26 @@ function clickSquare() {
     checkWin();
 }
 
+
+//need to update to hover COLUMN????? just extra work
+//todo update 
 function hoverSquare(){
     let hover = parseInt(this.dataset.id);
-    squares.forEach(function(e) {
-        if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
-            if(e.getAttribute('data-id') == hover) {
-                e.classList.remove('square');
-                e.classList.add('hover');
+    console.log(this.dataset.id);
+  
+        squares.forEach(function(e) {
+            if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+                if(e.getAttribute('data-id') == hover) {
+                    e.classList.remove('square');
+                    e.classList.add('hover');
+                }
+                if(e.getAttribute('data-id') != hover) {
+                    e.classList.remove('hover');
+                    e.classList.add('square');
+                }
             }
-            if(e.getAttribute('data-id') != hover) {
-                e.classList.remove('hover');
-                e.classList.add('square');
-            }
-        }
-    });
+        });
+    
 }
 
 // createBoard function fills boardArray with circle data all set to 0
