@@ -105,8 +105,21 @@ function createBoard(){
 }
 
 function checkWin() {
-    //this is also wrong
     //i dont think i need a counter, this should be possible with iteration
+
+    //something like:
+    /*
+    solution outer array {
+        solution inner array {
+            for each item array {
+                check inner each against item array each????
+            }
+        }
+    }
+    
+    */
+
+    //this is also wrong
    winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
