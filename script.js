@@ -119,7 +119,7 @@ function checkWin() {
     
     */
 
-    //this is also wrong
+    //this is wrong probably??????
    winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
@@ -127,16 +127,18 @@ function checkWin() {
         if (e.includes(p1Array[i])&&p1Array.includes(p1Array[i])) {
             num1++
         }
+        if (num1 >= 4 && won === false) {      
+            messageEl.innerText = "Congratulations Player 1! You win."
+            won = true;
+            console.log("p1 "+p1Array);
+            console.log("p2 "+p2Array);
+    
+            }
+
         if (e.includes(p2Array[i])&&p2Array.includes(p2Array[i])) {
             num2++
         }
-        if (num1 >= 4 && won === false) {      
-        messageEl.innerText = "Congratulations Player 1! You win."
-        won = true;
-        console.log("p1 "+p1Array);
-        console.log("p2 "+p2Array);
-
-        }
+        
         if (num2 >= 4 && won === false) {      
         messageEl.innerText = "Congratulations Player 2! You win."
         won = true;
