@@ -2,9 +2,7 @@
 ## Pseudocode:
 ### Create datatype for what is in each slot
 * 2d array in javascript would work quite well. 
-* Each array could be a row with 7 items each representing a column. 
-* The item in the column array (inner array) could just be a number from 0-2, 0 being empty, 1 being player 1 circle and 2 being player 2 circle.
-* Initialize the first six arrays 0-5 then the items within from 0-6 numbers 0 
+* Each array could be a position with 3 items representing empty, p1 token, p2 token.
 ### Create the board grid
 * since it is preset we can just hard code the css with a flexbox grid of 6x7 and have an empty board showing on refresh. 
 ### Logic to decide which players turn it is (just needs to alternate after a piece is placed)
