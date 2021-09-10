@@ -106,11 +106,12 @@ function createBoard(){
 
 function checkWin() {
     //this is also wrong
+    //i dont think i need a counter, this should be possible with iteration
    winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
     for (let i = 0;i<winningArray.length; i++) {
-        if (e.includes(p1Array[i])&&!p1Array.includes(p1Array[i])) {
+        if (e.includes(p1Array[i])&&p1Array.includes(p1Array[i])) {
             num1++
         }
         if (e.includes(p2Array[i])&&p2Array.includes(p2Array[i])) {
