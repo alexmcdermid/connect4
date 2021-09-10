@@ -21,3 +21,9 @@
 .p2 {
     background: yellow;
 }
+.hover {
+    background: lightseagreen;
+}
+.reset {
+    font-size: 80px;
+}

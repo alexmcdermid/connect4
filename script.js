@@ -38,6 +38,7 @@ let winningArray = [
 //event listener 
 Array.from(squares).forEach(square=> {
     square.addEventListener('click', clickSquare)
+    square.addEventListener('mouseover', hoverSquare)
 })
 
 document.querySelector('.reset').addEventListener('click', createBoard);
@@ -48,6 +49,22 @@ function clickSquare() {
     update();
     render();
     checkWin();
+}
+
+function hoverSquare(){
+    let hover = parseInt(this.dataset.id);
+    squares.forEach(function(e) {
+        if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+            if(e.getAttribute('data-id') == hover) {
+                e.classList.remove('square');
+                e.classList.add('hover');
+            }
+            if(e.getAttribute('data-id') != hover) {
+                e.classList.remove('hover');
+                e.classList.add('square');
+            }
+        }
+    });
 }
 
 // createBoard function fills boardArray with circle data all set to 0
@@ -93,7 +110,7 @@ function checkWin() {
            if (p1Array.includes(i)) {
             num1++;
             }
-            if (num1 >= 4) {
+            if (num1 >= 4) {               
                 alert("p1 win")
             }
             if (p2Array.includes(i)) {
@@ -115,12 +132,14 @@ function render() {
         if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
             if(e.getAttribute('data-id') == toFill && playerTurn == 1) {
                 e.classList.remove('square');
+                e.classList.remove('hover');
                 e.classList.add('p1');
                 boardArray[toFill] = 1;
                 playerTurn = 2;
             }
             else if(e.getAttribute('data-id') == toFill && playerTurn == 2) {
                 e.classList.remove('square');
+                e.classList.remove('hover');
                 e.classList.add('p2');
                 boardArray[toFill] = 2;
                 playerTurn = 1;
