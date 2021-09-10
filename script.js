@@ -8,6 +8,7 @@ let currentClick = null;
 let toFill = null;
 let p1Array = [];
 let p2Array = [];
+let won = false;
 
 //full disclosure i googled the winning combination list lol
 let winningArray = [ 
@@ -94,6 +95,7 @@ function createBoard(){
     playerTurn = 1;
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
     messageEl.innerText = "";
+    won = false;
 
     //create board
     for(let i=0;i<42;i++){ 
@@ -111,14 +113,16 @@ function checkWin() {
            if (p1Array.includes(i)) {
             num1++;
             }
-            if (num1 >= 4) {      
+            if (num1 >= 4 && won === false) {      
                 messageEl.innerText = "Congratulations Player 1! You win."
+                won = true;
             }
             if (p2Array.includes(i)) {
                 num2++;
             }
-            if (num2 >= 4) {
+            if (num2 >= 4 && won === false) {
                 messageEl.innerText = "Congratulations Player 2! You win."
+                won = true;
             }
         
        });
