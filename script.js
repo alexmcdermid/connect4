@@ -116,7 +116,6 @@ function checkWin() {
             }
         }
     }
-    
     */
 
     //this is wrong probably??????
