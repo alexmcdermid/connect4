@@ -2,9 +2,9 @@
 let boardArray = [];
 let board = document.querySelector(".board"); 
 let squares = document.querySelectorAll(".board div");
-let playerTurn = 1;
 let playerTurnEl = document.querySelector("h1");
 let messageEl = document.querySelector(".message");
+let playerTurn = 1;
 let currentClick = null;
 let toFill = null;
 let p1Array = [];
@@ -46,6 +46,8 @@ Array.from(squares).forEach(square=> {
 
 document.querySelector('.reset').addEventListener('click', createBoard);
 
+//functions
+//main function, controls update flow of most things based on clicks
 function clickSquare() {
     let click = parseInt(this.dataset.id);
     currentClick = click;
@@ -139,8 +141,8 @@ function createBoard(){
     } 
 }
 
+//win logic, checks each winning array possibility against the numbers in each players array
 function checkWin() {
-    //I think this is right
     winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
@@ -171,6 +173,7 @@ function checkWin() {
    });
 }
 
+//function to render the discs into the html as well as update text
 function render() {
     squares.forEach(function(e) {
         if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
@@ -197,6 +200,8 @@ function render() {
 
 //todo dry
 // update: it is done
+// logic to deal with filling the correct item based on which column is pressed
+// makes sure that it is placing the disc at the top of the stack
 function update() {
 
     for (let i = 0; i<=6; i++) {
@@ -342,5 +347,5 @@ function update() {
 }
 
 
-
+//called once on refresh to populate the board array in js
 createBoard();
