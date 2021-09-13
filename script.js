@@ -51,9 +51,32 @@ function clickSquare() {
     currentClick = click;
     update();
     render();
+    hoverSquareClick();
     checkWin();
 }
 
+//handle updating hover color on click when cursor doesn't move and doesn't trigger hover update
+function hoverSquareClick(){
+    let hover = currentClick;
+    squares.forEach(function(e) {
+        if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+            if(e.getAttribute('data-id') == hover) {
+                if (playerTurn === 1) {
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.remove('square');
+                    e.classList.add('p1hover');
+                }
+                if (playerTurn === 2) {
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.remove('square');
+                    e.classList.add('p2hover');
+                }
+            }
+        }
+    });
+}
 
 //hightlight hover square with tile being placed
 function hoverSquare(){
@@ -61,11 +84,11 @@ function hoverSquare(){
         squares.forEach(function(e) {
             if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
                 if(e.getAttribute('data-id') == hover) {
-                    if (playerTurn == 1) {
+                    if (playerTurn === 1) {
                         e.classList.remove('square');
                         e.classList.add('p1hover');
                     }
-                    if (playerTurn == 2) {
+                    if (playerTurn === 2) {
                         e.classList.remove('square');
                         e.classList.add('p2hover');
                     }
@@ -117,19 +140,6 @@ function createBoard(){
 }
 
 function checkWin() {
-    //i dont think i need a counter, this should be possible with iteration
-
-    //something like:
-    /*
-    solution outer array {
-        solution inner array {
-            for each item array {
-                check inner each against item array each????
-            }
-        }
-    }
-    */
-
     //I think this is right
     winningArray.forEach(function(e) {
     let num1 = 0;
@@ -166,14 +176,16 @@ function render() {
         if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
             if(e.getAttribute('data-id') == toFill && playerTurn == 1) {
                 e.classList.remove('square');
-                e.classList.remove('hover');
+                e.classList.remove('p1hover');
+                e.classList.remove('p2hover');
                 e.classList.add('p1');
                 boardArray[toFill] = 1;
                 playerTurn = 2;
             }
             else if(e.getAttribute('data-id') == toFill && playerTurn == 2) {
                 e.classList.remove('square');
-                e.classList.remove('hover');
+                e.classList.remove('p1hover');
+                e.classList.remove('p2hover');
                 e.classList.add('p2');
                 boardArray[toFill] = 2;
                 playerTurn = 1;
