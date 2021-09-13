@@ -101,7 +101,7 @@ function createBoard(){
     messageEl.innerText = "";
     won = false;
 
-    //create board
+    //populate board data structure 
     for(let i=0;i<42;i++){ 
     //add item with num 0-2 to boardArray, 0empty, 1red, 2yellow to keep track of data in js
     let boardItem = [0];
@@ -138,18 +138,15 @@ function checkWin() {
             console.log("p2 "+p2Array);
             console.log("the winning array "+e);
             }
-
         if (e.includes(p2Array[i])) {
             num2++
         }
-        
         if (num2 >= 4 && won === false) {      
         messageEl.innerText = "Congratulations Player 2! You win."
         won = true;
         console.log("p2 "+p2Array);
         console.log("p1 "+p1Array);
         console.log("the winning array "+e);
-
         }
     }
     //this is wrong
@@ -179,7 +176,6 @@ function checkWin() {
 
 function render() {
     squares.forEach(function(e) {
-
         if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
             if(e.getAttribute('data-id') == toFill && playerTurn == 1) {
                 e.classList.remove('square');
