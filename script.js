@@ -11,6 +11,7 @@ let p2Array = [];
 let won = false;
 
 //full disclosure i googled the winning combination list lol
+// should double check these perhaps this is what is causing the bugs
 let winningArray = [ 
     [0, 1, 2, 3], [41, 40, 39, 38],[7, 8, 9, 10], 
     [34, 33, 32, 31], [14, 15, 16, 17], [27, 26, 25, 24], 
@@ -37,7 +38,7 @@ let winningArray = [
     [11, 18, 25, 32], [12, 19, 26, 33], [13, 20, 27, 34] 
     ]; 
 
-//event listener 
+//event listeners
 Array.from(squares).forEach(square=> {
     square.addEventListener('click', clickSquare)
     square.addEventListener('mouseover', hoverSquare)
@@ -55,7 +56,7 @@ function clickSquare() {
 
 
 //need to update to hover COLUMN????? just extra work
-//todo update 
+//todo update hover column and unhover when not hovering on the board
 function hoverSquare(){
     let hover = parseInt(this.dataset.id);
         squares.forEach(function(e) {
@@ -76,15 +77,19 @@ function hoverSquare(){
 function createBoard(){ 
 
     //reset board
-    while(boardArray.length>1) {
+    while(boardArray.length>0) {
         boardArray.pop();
     }
-    while(p1Array.length>1) {
+    while(p1Array.length>0) {
         p1Array.pop();
     }
-    while(p2Array.length>1) {
+    while(p2Array.length>0) {
         p2Array.pop();
     }
+    console.log("p1 array on reset "+p1Array);
+    console.log("p2 array on reset "+p2Array);
+    console.log("board array on reset "+boardArray);
+
     squares.forEach(function(e) {
         if (e.classList.contains("p1")||e.classList.contains("p2")) {
             e.classList.replace("p1","square");
@@ -131,7 +136,7 @@ function checkWin() {
             won = true;
             console.log("p1 "+p1Array);
             console.log("p2 "+p2Array);
-    
+            console.log("the winning array "+e);
             }
 
         if (e.includes(p2Array[i])) {
@@ -143,6 +148,7 @@ function checkWin() {
         won = true;
         console.log("p2 "+p2Array);
         console.log("p1 "+p1Array);
+        console.log("the winning array "+e);
 
         }
     }
@@ -196,8 +202,23 @@ function render() {
 
 
 function update() {
-     //check that class position is empty
-     //far left column logic
+    // attempt to dry logic for far left column
+//     if (currentClick === 0 || currentClick%7 === 0) {
+//         console.log("outer if")
+//         for (let i = 1; i<7; i++) {
+//             console.log("for loop");
+//             console.log(boardArray[i*7+7]);
+//          if (boardArray[i*7+7] != 0 && board[i*7] == 0) {
+//             console.log(i*7+7);
+//             toFill = (i+1)*7;
+//         } else if (board[0]) {
+//                 toFill = 0;
+//         }
+//     }
+// }
+
+    //  check that class position is empty
+    //  far left column logic
      if (currentClick === 0 ||currentClick === 7||currentClick===14||currentClick===21||currentClick===28||currentClick===35) {
          if (boardArray[35] == 0) {
              toFill = 35;
