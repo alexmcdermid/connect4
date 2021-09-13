@@ -199,7 +199,7 @@ function render() {
 // update: it is done
 function update() {
 
-    for (let i = 0; i<6; i++) {
+    for (let i = 0; i<=6; i++) {
         if (currentClick === i || currentClick % 7 === i) {
             if (boardArray[i+35] == 0) {
                 toFill = i+35;
