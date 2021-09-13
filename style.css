@@ -34,10 +34,10 @@
     font-size: 80px;
 }
 .p1message {
-    color: red;
+    text-shadow: 2px 2px 5px red;
 }
 .p2message {
-    color: yellow;
+    text-shadow: 2px 2px 5px yellow;
 }
 h1 {
     font-size: 80px;
