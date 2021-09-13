@@ -10,6 +10,7 @@ let toFill = null;
 let p1Array = [];
 let p2Array = [];
 let won = false;
+let tie = false;
 
 //constant values
 const winningArray = [ 
@@ -129,6 +130,7 @@ function createBoard(){
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
     messageEl.innerText = "";
     won = false;
+    tie = false;
     messageEl.classList.remove('p1message');
     messageEl.classList.remove('p2message');
 
@@ -142,6 +144,17 @@ function createBoard(){
 
 //win logic, checks each winning array possibility against the numbers in each players array
 function checkWin() {
+    let tieNum = 0;
+    for (let i = 0; i<boardArray.length; i++) {
+        if (boardArray[i] != 0) {
+            tieNum++;
+        }
+    }
+    if (tieNum === 42) {
+        messageEl.innerText = "Tie game!";
+        tie = true;
+    }
+    console.log(tieNum);
     winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
@@ -150,7 +163,7 @@ function checkWin() {
             num1++
         }
         if (num1 >= 4 && won === false) {      
-            messageEl.innerText = "Congratulations Player 1! You win."
+            messageEl.innerText = "Congratulations Player 1! You win.";
             messageEl.classList.add('p1message');
             won = true;
             }
@@ -158,7 +171,7 @@ function checkWin() {
             num2++
         }
         if (num2 >= 4 && won === false) {      
-        messageEl.innerText = "Congratulations Player 2! You win."
+        messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;
         }
