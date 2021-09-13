@@ -154,7 +154,6 @@ function checkWin() {
         messageEl.innerText = "Tie game!";
         tie = true;
     }
-    console.log(tieNum);
     winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
