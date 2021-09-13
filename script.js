@@ -10,6 +10,7 @@ let toFill = null;
 let p1Array = [];
 let p2Array = [];
 let won = false;
+let tie = false;
 
 //constant values
 const winningArray = [ 
@@ -118,9 +119,6 @@ function createBoard(){
     while(p2Array.length>0) {
         p2Array.pop();
     }
-    console.log("p1 array on reset "+p1Array);
-    console.log("p2 array on reset "+p2Array);
-    console.log("board array on reset "+boardArray);
 
     squares.forEach(function(e) {
         if (e.classList.contains("p1")||e.classList.contains("p2")) {
@@ -132,6 +130,7 @@ function createBoard(){
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
     messageEl.innerText = "";
     won = false;
+    tie = false;
     messageEl.classList.remove('p1message');
     messageEl.classList.remove('p2message');
 
@@ -145,6 +144,16 @@ function createBoard(){
 
 //win logic, checks each winning array possibility against the numbers in each players array
 function checkWin() {
+    let tieNum = 0;
+    for (let i = 0; i<boardArray.length; i++) {
+        if (boardArray[i] != 0) {
+            tieNum++;
+        }
+    }
+    if (tieNum === 42) {
+        messageEl.innerText = "Tie game!";
+        tie = true;
+    }
     winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
@@ -153,23 +162,17 @@ function checkWin() {
             num1++
         }
         if (num1 >= 4 && won === false) {      
-            messageEl.innerText = "Congratulations Player 1! You win."
+            messageEl.innerText = "Congratulations Player 1! You win.";
             messageEl.classList.add('p1message');
             won = true;
-            console.log("p1 "+p1Array);
-            console.log("p2 "+p2Array);
-            console.log("the winning array "+e);
             }
         if (e.includes(p2Array[i])) {
             num2++
         }
         if (num2 >= 4 && won === false) {      
-        messageEl.innerText = "Congratulations Player 2! You win."
+        messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;
-        console.log("p2 "+p2Array);
-        console.log("p1 "+p1Array);
-        console.log("the winning array "+e);
         }
     }
        num1 = 0;
