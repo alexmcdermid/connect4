@@ -21,6 +21,12 @@
 .p2 {
     background: yellow;
 }
+.p1hover {
+    background:  lightcoral;
+}
+.p2hover {
+    background: rgb(250, 250, 138);
+}
 .hover {
     background: lightseagreen;
 }

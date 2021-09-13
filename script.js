@@ -1,3 +1,4 @@
+//variables
 let boardArray = [];
 let board = document.querySelector(".board"); 
 let squares = document.querySelectorAll(".board div");
@@ -10,9 +11,8 @@ let p1Array = [];
 let p2Array = [];
 let won = false;
 
-//full disclosure i googled the winning combination list lol
-// should double check these perhaps this is what is causing the bugs
-let winningArray = [ 
+//constant values
+const winningArray = [ 
     [0, 1, 2, 3], [41, 40, 39, 38],[7, 8, 9, 10], 
     [34, 33, 32, 31], [14, 15, 16, 17], [27, 26, 25, 24], 
     [21, 22, 23, 24], [20, 19, 18, 17], [28, 29, 30, 31], 
@@ -55,18 +55,24 @@ function clickSquare() {
 }
 
 
-//need to update to hover COLUMN????? just extra work
-//todo update hover column and unhover when not hovering on the board
+//hightlight hover square with tile being placed
 function hoverSquare(){
     let hover = parseInt(this.dataset.id);
         squares.forEach(function(e) {
             if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
                 if(e.getAttribute('data-id') == hover) {
-                    e.classList.remove('square');
-                    e.classList.add('hover');
+                    if (playerTurn == 1) {
+                        e.classList.remove('square');
+                        e.classList.add('p1hover');
+                    }
+                    if (playerTurn == 2) {
+                        e.classList.remove('square');
+                        e.classList.add('p2hover');
+                    }
                 }
                 if(e.getAttribute('data-id') != hover) {
-                    e.classList.remove('hover');
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
                     e.classList.add('square');
                 }
             }
@@ -74,6 +80,7 @@ function hoverSquare(){
 }
 
 // createBoard function fills boardArray with circle data all set to 0
+// this function also resets an already created board to starting values
 function createBoard(){ 
 
     //reset board
@@ -123,8 +130,8 @@ function checkWin() {
     }
     */
 
-    //this is wrong probably??????
-   winningArray.forEach(function(e) {
+    //I think this is right
+    winningArray.forEach(function(e) {
     let num1 = 0;
     let num2 = 0;
     for (let i = 0;i<winningArray.length; i++) {
@@ -149,26 +156,6 @@ function checkWin() {
         console.log("the winning array "+e);
         }
     }
-    //this is wrong
-    //     e.forEach(function(i) {
-    //         if (p1Array.includes(i)) {
-    //         num1++;
-    //         }
-    //         if (num1 >= 4 && won === false) {      
-    //             messageEl.innerText = "Congratulations Player 1! You win."
-    //             won = true;
-    //             console.log(p1Array);
-    //         }
-    //         if (p2Array.includes(i)) {
-    //             num2++;
-    //         }
-    //         if (num2 >= 4 && won === false) {
-    //             messageEl.innerText = "Congratulations Player 2! You win."
-    //             won = true;
-    //             console.log(p2Array);
-    //         }
-        
-    //    });
        num1 = 0;
        num2 = 0;
    });
