@@ -195,26 +195,11 @@ function render() {
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
 }
 
-
+//todo dry
 function update() {
-    // attempt to dry logic for far left column
-//     if (currentClick === 0 || currentClick%7 === 0) {
-//         console.log("outer if")
-//         for (let i = 1; i<7; i++) {
-//             console.log("for loop");
-//             console.log(boardArray[i*7+7]);
-//          if (boardArray[i*7+7] != 0 && board[i*7] == 0) {
-//             console.log(i*7+7);
-//             toFill = (i+1)*7;
-//         } else if (board[0]) {
-//                 toFill = 0;
-//         }
-//     }
-// }
-
     //  check that class position is empty
     //  far left column logic
-     if (currentClick === 0 ||currentClick === 7||currentClick===14||currentClick===21||currentClick===28||currentClick===35) {
+     if (currentClick === 0 ||currentClick % 7 === 0) {
          if (boardArray[35] == 0) {
              toFill = 35;
          } else if (boardArray[35] != 0 && boardArray[28] == 0) {
@@ -230,7 +215,7 @@ function update() {
          }
      }
      //column 01 logic
-      if (currentClick === 1||currentClick === 8||currentClick===15||currentClick===22||currentClick===29||currentClick===36) {
+      if (currentClick === 1||currentClick % 7 === 1) {
          if (boardArray[36] == 0) {
              toFill = 36;
          } else if (boardArray[36] != 0 && boardArray[29] == 0) {
@@ -246,7 +231,7 @@ function update() {
          }
      }
     //column 02 logic
-    if (currentClick === 2||currentClick === 9||currentClick===16||currentClick===23||currentClick===30||currentClick===37) {
+    if (currentClick === 2 || currentClick % 7 === 2) {
         if (boardArray[37] == 0) {
             toFill = 37;
         } else if (boardArray[37] != 0 && boardArray[30] == 0) {
@@ -262,7 +247,7 @@ function update() {
         }
     }
     //column 03 logic
-    if (currentClick === 3||currentClick === 10||currentClick===17||currentClick===24||currentClick===31||currentClick===38) {
+    if (currentClick === 3|| currentClick % 7 === 3) {
         if (boardArray[38] == 0) {
             toFill = 38;
         } else if (boardArray[38] != 0 && boardArray[31] == 0) {
@@ -278,7 +263,7 @@ function update() {
         }
     }
      //column 04 logic
-     if (currentClick === 4||currentClick === 11||currentClick===18||currentClick===25||currentClick===32||currentClick===39) {
+     if (currentClick === 4||currentClick % 7 === 4) {
         if (boardArray[39] == 0) {
             toFill = 39;
         } else if (boardArray[39] != 0 && boardArray[32] == 0) {
@@ -294,7 +279,7 @@ function update() {
         }
     }
       //column 05 logic
-      if (currentClick === 5||currentClick === 12||currentClick===19||currentClick===26||currentClick===33||currentClick===40) {
+      if (currentClick === 5||currentClick % 7 === 5) {
         if (boardArray[40] == 0) {
             toFill = 40;
         } else if (boardArray[40] != 0 && boardArray[33] == 0) {
@@ -310,7 +295,7 @@ function update() {
         }
     }
      //far right column logic
-     if (currentClick === 6||currentClick === 13||currentClick===20||currentClick===27||currentClick===34||currentClick===41) {
+     if (currentClick === 6||currentClick % 7 === 6) {
         if (boardArray[41] == 0) {
             toFill = 41;
         } else if (boardArray[41] != 0 && boardArray[34] == 0) {
