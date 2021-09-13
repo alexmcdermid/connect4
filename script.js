@@ -132,6 +132,8 @@ function createBoard(){
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
     messageEl.innerText = "";
     won = false;
+    messageEl.classList.remove('p1message');
+    messageEl.classList.remove('p2message');
 
     //populate board data structure 
     for(let i=0;i<42;i++){ 
@@ -152,6 +154,7 @@ function checkWin() {
         }
         if (num1 >= 4 && won === false) {      
             messageEl.innerText = "Congratulations Player 1! You win."
+            messageEl.classList.add('p1message');
             won = true;
             console.log("p1 "+p1Array);
             console.log("p2 "+p2Array);
@@ -162,6 +165,7 @@ function checkWin() {
         }
         if (num2 >= 4 && won === false) {      
         messageEl.innerText = "Congratulations Player 2! You win."
+        messageEl.classList.add('p2message');
         won = true;
         console.log("p2 "+p2Array);
         console.log("p1 "+p1Array);

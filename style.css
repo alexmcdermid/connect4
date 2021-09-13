@@ -32,7 +32,12 @@
 }
 .message {
     font-size: 80px;
-    color:green;
+}
+.p1message {
+    color: red;
+}
+.p2message {
+    color: yellow;
 }
 h1 {
     font-size: 80px;
