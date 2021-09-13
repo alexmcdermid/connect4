@@ -27,15 +27,17 @@
 .p2hover {
     background: rgb(250, 250, 138);
 }
-.hover {
-    background: lightseagreen;
-}
 .reset {
     font-size: 80px;
 }
 .message {
     font-size: 80px;
-    color:green;
+}
+.p1message {
+    text-shadow: 2px 2px 5px red;
+}
+.p2message {
+    text-shadow: 2px 2px 5px yellow;
 }
 h1 {
     font-size: 80px;
