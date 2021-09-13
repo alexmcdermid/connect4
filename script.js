@@ -196,8 +196,23 @@ function render() {
 
 
 function update() {
-     //check that class position is empty
-     //far left column logic
+    // attempt to dry logic for far left column
+//     if (currentClick === 0 || currentClick%7 === 0) {
+//         console.log("outer if")
+//         for (let i = 1; i<7; i++) {
+//             console.log("for loop");
+//             console.log(boardArray[i*7+7]);
+//          if (boardArray[i*7+7] != 0 && board[i*7] == 0) {
+//             console.log(i*7+7);
+//             toFill = (i+1)*7;
+//         } else if (board[0]) {
+//                 toFill = 0;
+//         }
+//     }
+// }
+
+    //  check that class position is empty
+    //  far left column logic
      if (currentClick === 0 ||currentClick === 7||currentClick===14||currentClick===21||currentClick===28||currentClick===35) {
          if (boardArray[35] == 0) {
              toFill = 35;
