@@ -182,27 +182,29 @@ function checkWin() {
 
 //function to render the discs into the html as well as update text
 function render() {
-    squares.forEach(function(e) {
-        if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
-            if(e.getAttribute('data-id') == toFill && playerTurn == 1) {
-                e.classList.remove('square');
-                e.classList.remove('p1hover');
-                e.classList.remove('p2hover');
-                e.classList.add('p1');
-                boardArray[toFill] = 1;
-                playerTurn = 2;
+    if (won === false) {
+        squares.forEach(function(e) {
+            if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+                if(e.getAttribute('data-id') == toFill && playerTurn == 1) {
+                    e.classList.remove('square');
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.add('p1');
+                    boardArray[toFill] = 1;
+                    playerTurn = 2;
+                }
+                else if(e.getAttribute('data-id') == toFill && playerTurn == 2) {
+                    e.classList.remove('square');
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.add('p2');
+                    boardArray[toFill] = 2;
+                    playerTurn = 1;
+                }
             }
-            else if(e.getAttribute('data-id') == toFill && playerTurn == 2) {
-                e.classList.remove('square');
-                e.classList.remove('p1hover');
-                e.classList.remove('p2hover');
-                e.classList.add('p2');
-                boardArray[toFill] = 2;
-                playerTurn = 1;
-            }
-        }
-    });
-    playerTurnEl.innerText = "Player Turn: "+playerTurn;
+        });
+        playerTurnEl.innerText = "Player Turn: "+playerTurn;
+    }
 }
 
 // logic to deal with filling the correct item based on which column is pressed
