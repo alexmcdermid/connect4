@@ -16,7 +16,7 @@ function clickSquare() {
     render();
 }
 
-//creates board on refresh
+//creates board on page refresh
 function createBoard() {
     //refactor for new data type
     //2d array 
@@ -36,18 +36,20 @@ function createBoard() {
 
 //update the data structure on click to represent what was clicked
 function update() {
-    
+    //gets column clicked as single number/string
     let columnClicked = currentClick.toString()[1];
-    let rowClicked = currentClick.toString()[0];
-   
+    //sets to change to column in question in board array
     toChange = boardArray[columnClicked-1];
+    //sets defaults bottom the the very bottom
     let bottom = 5;
 
+    //checks for the bottom of the column in question and sets bottom to be the next free slot
     for(let i = toChange.length-1; i>0; i--) {
         if(toChange[i] === 1 || toChange[i] === 2) {
             bottom = i-1;
         }
     }
+    //fills the free slot in question with 1 or 2 depending on whichs players turn it is and changes the turn
     if (playerTurn ===1) {
         boardArray[columnClicked-1][bottom] = 1;
         playerTurn*=-1;
@@ -61,21 +63,10 @@ function update() {
 
 //render the data structure on to the html using DOM
 function render() {
-    let columnClicked = currentClick.toString()[1];
-    let rowClicked = currentClick.toString()[0];
-    console.log(`${rowClicked}${columnClicked}`)
-
-    squares.forEach(function(e) {
-        console.log(`${rowClicked}${columnClicked}`)
-        
-        if(e.getAttribute('data-id') === `${rowClicked}${columnClicked}`) {
-            if (boardArray[columnClicked-1][rowClicked-1] === 1) {
-                e.classList.replace('square','p1');
-            } 
-        }
-    });
+    
 }
 
+//resets the board to the starting board and sets player turn to 1
 function reset() {
     let l = boardArray.length;
     for (let i = 0; i<l;i++) {
