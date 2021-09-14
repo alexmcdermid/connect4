@@ -235,8 +235,6 @@ function update() {
     } else if (playerTurn == 2&&!p2Array.includes(toFill)) {
         p2Array.push(toFill);
     }
-
-    
 }
 
 
