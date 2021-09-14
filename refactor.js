@@ -113,28 +113,30 @@ function checkWin() {
 
 //checks columns for win condition 
 function checkColumn() {
+    console.log(lastChanged);
     let columnToCheck = lastChanged.toString()[0];
     let counter1 = 0;
     let counter2 = 0;
-    //check that there are at least 4 items vertically to check
-    if (boardArray[columnToCheck-1].lastIndexOf(0) <= 1) {
-        //check to see if we have 1 or 2 in a row 4 times and print message
-        for (let i = 0; i<boardArray[columnToCheck-1].length;i++) {
-            if (boardArray[columnToCheck-1][i]===1) {
-                counter1++;
-            }
-            if (boardArray[columnToCheck-1][i]===2) {
-                counter2++;
-            }
+    //console.log(boardArray[7][1]);
+    //check to see if we have 1 or 2 in a row 4 times 
+
+    //NOTE THIS IS JUST CHECKING HOW MANY ARE IN THE ROW BUT IT WORKS
+    for (let i = 1; i<6;i++) {
+        if (boardArray[columnToCheck-1][i]===1) {
+            counter1++;
+        }
+        if (boardArray[columnToCheck-1][i]===2) {
+            counter2++;
         }
     }
+    //print message and set won to true to stop updaetes
     if(won === true)
         return
-    else if (counter1>2) {
+    else if (counter1>3) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         won = true;
     }
-    else if (counter2>2) {
+    else if (counter2>3) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         won = true;
     }
