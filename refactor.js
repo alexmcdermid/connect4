@@ -1,7 +1,9 @@
 let boardArray = [];
 let squares = document.querySelectorAll(".board div");
 let playerTurnEl = document.querySelector("h1");
+let messageEl = document.querySelector(".message");
 let playerTurn = 1;
+let lastChanged = null;
 
 //event listeners
 Array.from(squares).forEach(square=> {
@@ -40,7 +42,6 @@ function createBoard() {
 function update() {
     //gets column clicked as single number/string
     let columnClicked = currentClick.toString()[1];
-    console.log(columnClicked);
     //sets to change to column in question in board array
     let toChange = boardArray[columnClicked-1];
     //sets defaults bottom the the very bottom
@@ -50,15 +51,16 @@ function update() {
     if(toChange.lastIndexOf(0) === -1)
         return;
     //checks for the bottom of the column in question and sets bottom to be the next free slot
+    //TODO rebuild using arr.lastindexof 0
     for(let i = toChange.length; i>0; i--) {
         
         if(toChange[i] === 1 || toChange[i] === 2) {
             bottom = i-1;
         }
-
-    //TODO rebuild using arr.lastindexof 0
-        
     }
+
+    //the last changed token slot DO NOT REMOVE USED FOR CHECK WIN LOGIC
+    lastChanged = `${columnClicked}${bottom+1}`;
     //fills the free slot in question with 1 or 2 depending on whichs players turn it is and changes the turn
     
         if (playerTurn ===1) {
@@ -100,16 +102,63 @@ function render() {
 }
 
 function checkWin() {
-    //TODO check column
-    //TODO check row
+    checkColumn()
+    checkRow()
+
+    
 
     //TODO check diag
+}
+
+function checkColumn() {
+    console.log(lastChanged);
+    let columnToCheck = lastChanged.toString()[0];
+    let rowToCheck = lastChanged.toString()[1];
+    let counter1 = 0;
+    let counter2 = 0;
+    //check that there are at least 4 items vertically to check
+    if (boardArray[columnToCheck-1].lastIndexOf(0) <= 1) {
+        console.log(boardArray[columnToCheck-1])
+        //check to see if we have 1 or 2 in a row 4 times and print message
+        for (let i = 0; i<boardArray[columnToCheck-1].length;i++) {
+            if (counter1>2) {
+                messageEl.innerText = "Congratulations Player 1! You win.";
+            }
+            if (boardArray[columnToCheck-1][i]===1) {
+                counter1++;
+            }
+            if (counter2>2) {
+                messageEl.innerText = "Congratulations Player 2! You win.";
+            }
+            if (boardArray[columnToCheck-1][i]===2) {
+                counter2++;
+            }
+        }
+    }
+    //checkup
+    //checkdown
+}
+
+function checkRow() {
+    //checkright
+    //checkleft
 }
 
 function upperRight() {
 
 }
 
+function upperLeft() {
+
+}
+
+function bottomRight() {
+
+}
+
+function bottomLeft() {
+
+}
 //resets the board to the starting board and sets player turn to 1
 function reset() {
     let l = boardArray.length;
