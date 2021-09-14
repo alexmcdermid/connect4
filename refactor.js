@@ -4,6 +4,7 @@ let playerTurnEl = document.querySelector("h1");
 let messageEl = document.querySelector(".message");
 let playerTurn = 1;
 let lastChanged = null;
+let won = false;
 
 //event listeners
 Array.from(squares).forEach(square=> {
@@ -80,6 +81,7 @@ function render() {
    let toFill;
    let toFillCol;
    let toFillRow;
+   if (won === true) return;
    boardArray.forEach(function(innerArray, index) {
        toFillCol = index+1;
         innerArray.forEach(function(innerArrayItem, index) {
@@ -110,10 +112,9 @@ function checkWin() {
     //TODO check diag
 }
 
+//checks columns for win condition 
 function checkColumn() {
-    console.log(lastChanged);
     let columnToCheck = lastChanged.toString()[0];
-    let rowToCheck = lastChanged.toString()[1];
     let counter1 = 0;
     let counter2 = 0;
     //check that there are at least 4 items vertically to check
@@ -121,22 +122,24 @@ function checkColumn() {
         console.log(boardArray[columnToCheck-1])
         //check to see if we have 1 or 2 in a row 4 times and print message
         for (let i = 0; i<boardArray[columnToCheck-1].length;i++) {
-            if (counter1>2) {
-                messageEl.innerText = "Congratulations Player 1! You win.";
-            }
             if (boardArray[columnToCheck-1][i]===1) {
                 counter1++;
-            }
-            if (counter2>2) {
-                messageEl.innerText = "Congratulations Player 2! You win.";
             }
             if (boardArray[columnToCheck-1][i]===2) {
                 counter2++;
             }
         }
     }
-    //checkup
-    //checkdown
+    if(won === true)
+        return
+    else if (counter1>2) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        won = true;
+    }
+    else if (counter2>2) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        won = true;
+    }
 }
 
 function checkRow() {
@@ -171,6 +174,7 @@ function reset() {
     });
     playerTurn = 1;
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
+    won = false;
     createBoard();
 }
 
