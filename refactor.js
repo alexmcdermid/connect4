@@ -15,6 +15,7 @@ function clickSquare() {
     currentClick = click;
     update();
     render();
+    checkWin();
 }
 
 //creates board on page refresh
@@ -50,7 +51,7 @@ function update() {
         if(toChange[i] === 1 || toChange[i] === 2) {
             bottom = i-1;
         }
-    
+    //TODO there is a bug here where the data structure can still change for the last item being filled. it shouldnt.
         
     }
     //fills the free slot in question with 1 or 2 depending on whichs players turn it is and changes the turn
@@ -91,6 +92,12 @@ function render() {
    else 
     playerTurnEl.innerText = "Player Turn: "+2;
 
+}
+
+function checkWin() {
+    //TODO check column
+    //TODO check row
+    //TODO check diag
 }
 
 //resets the board to the starting board and sets player turn to 1
