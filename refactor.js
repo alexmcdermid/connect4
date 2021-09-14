@@ -1,5 +1,6 @@
 let boardArray = [];
 let squares = document.querySelectorAll(".board div");
+let playerTurnEl = document.querySelector("h1");
 let playerTurn = 1;
 
 //event listeners
@@ -68,12 +69,6 @@ function update() {
 
 //render the data structure on to the html using DOM
 function render() {
-    //'${}${}'
-    //we are using the JS DATA and pushing to the DOM
-   //loop column
-   //loop row
-   //if x ===1 || 2
-   //set this index to index of dom element to 1 or 2 
    let toFill;
    let toFillCol;
    let toFillRow;
@@ -88,12 +83,13 @@ function render() {
                 toFillRow = index+1;
                 toFill = document.getElementById(`${toFillRow}${toFillCol}`);
                 toFill.classList.replace('square','p2');
-            }
-        })
-        
-
-        //console.log(toFill);
+            } 
+        })   
    })
+   if (playerTurn === 1)
+    playerTurnEl.innerText = "Player Turn: "+playerTurn;
+   else 
+    playerTurnEl.innerText = "Player Turn: "+2;
 
 }
 
@@ -108,6 +104,7 @@ function reset() {
         e.classList.replace('p2','square');
     });
     playerTurn = 1;
+    playerTurnEl.innerText = "Player Turn: "+playerTurn;
     createBoard();
 }
 
