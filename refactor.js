@@ -34,6 +34,7 @@ function createBoard() {
 //
 //results: this works! it updates the main data structure with 1 where clicked
 function update() {
+    //we broke this logic when updated the html data structure
     let columnClicked = currentClick%7;
        
     console.log(boardArray[columnClicked]);
@@ -42,12 +43,13 @@ function update() {
     } else {
         boardArray[columnClicked][5] = 1;
     }
-
+    console.log(currentClick);
+    console.log(columnClicked);
+    console.log(boardArray);
 }
 
 //todo render the data structure on to the html using DOM
 
-//we FUCKING DID IT BOYS REFACTOR BASICS COMPLETE
 function render() {
     let columnClicked = currentClick%7;
     let toFill = boardArray[columnClicked].indexOf(1);
