@@ -36,7 +36,6 @@ function createBoard() {
         }
         boardArray.push(outerArray);
     }
-    console.log(boardArray);
 }
 
 //update the data structure on click to represent what was clicked
@@ -119,7 +118,6 @@ function checkColumn() {
     let counter2 = 0;
     //check that there are at least 4 items vertically to check
     if (boardArray[columnToCheck-1].lastIndexOf(0) <= 1) {
-        console.log(boardArray[columnToCheck-1])
         //check to see if we have 1 or 2 in a row 4 times and print message
         for (let i = 0; i<boardArray[columnToCheck-1].length;i++) {
             if (boardArray[columnToCheck-1][i]===1) {
@@ -174,6 +172,7 @@ function reset() {
     });
     playerTurn = 1;
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
+    messageEl.innerText = "";
     won = false;
     createBoard();
 }
