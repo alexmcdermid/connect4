@@ -46,12 +46,17 @@ function update() {
     //sets defaults bottom the the very bottom
     let bottom = 5;
 
+    //check for no zeroes and return if none to avoid top slot bug
+    if(toChange.lastIndexOf(0) === -1)
+        return;
     //checks for the bottom of the column in question and sets bottom to be the next free slot
     for(let i = toChange.length; i>0; i--) {
+        
         if(toChange[i] === 1 || toChange[i] === 2) {
             bottom = i-1;
         }
-    //TODO there is a bug here where the data structure can still change for the last item being filled. it shouldnt.
+
+    //TODO rebuild using arr.lastindexof 0
         
     }
     //fills the free slot in question with 1 or 2 depending on whichs players turn it is and changes the turn
@@ -97,7 +102,12 @@ function render() {
 function checkWin() {
     //TODO check column
     //TODO check row
+
     //TODO check diag
+}
+
+function upperRight() {
+
 }
 
 //resets the board to the starting board and sets player turn to 1
