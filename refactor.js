@@ -117,11 +117,12 @@ function checkColumn() {
     let columnToCheck = lastChanged.toString()[0];
     let counter1 = 0;
     let counter2 = 0;
-    //console.log(boardArray[7][1]);
     //check to see if we have 1 or 2 in a row 4 times 
 
+    //TODO: WE WANT TO CHECK UP FROM THE CLICK SPOT AND DOWN FROM THE CLICK SPOT AND ITERATE
+
     //NOTE THIS IS JUST CHECKING HOW MANY ARE IN THE ROW BUT IT WORKS
-    for (let i = 1; i<6;i++) {
+    for (let i = 1; i<boardArray[columnToCheck-1].length;i++) {
         if (boardArray[columnToCheck-1][i]===1) {
             counter1++;
         }
