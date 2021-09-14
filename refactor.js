@@ -36,22 +36,42 @@ function createBoard() {
 
 //update the data structure on click to represent what was clicked
 function update() {
+    
     let columnClicked = currentClick.toString()[1];
-    if (boardArray[columnClicked].includes(1) && boardArray[columnClicked].indexOf(1)!=0) {
-        boardArray[columnClicked][boardArray[columnClicked].indexOf(1)-1] = 1;
+    let rowClicked = currentClick.toString()[0];
+   
+    toChange = boardArray[columnClicked-1];
+    let bottom = 5;
+
+    for(let i = toChange.length-1; i>0; i--) {
+        if(toChange[i] === 1 || toChange[i] === 2) {
+            bottom = i-1;
+        }
+    }
+    if (playerTurn ===1) {
+        boardArray[columnClicked-1][bottom] = 1;
+        playerTurn*=-1;
     } else {
-        boardArray[columnClicked][5] = 1;
+        boardArray[columnClicked-1][bottom] = 2;
+        playerTurn*=-1;
     }
     console.log(boardArray);
+
 }
 
 //render the data structure on to the html using DOM
 function render() {
     let columnClicked = currentClick.toString()[1];
-    let rowToFill = boardArray[columnClicked].indexOf(1);
+    let rowClicked = currentClick.toString()[0];
+    console.log(`${rowClicked}${columnClicked}`)
+
     squares.forEach(function(e) {
-        if(e.getAttribute('data-id') == `${rowToFill}${columnClicked}`) {
-            e.classList.add('p1');
+        console.log(`${rowClicked}${columnClicked}`)
+        
+        if(e.getAttribute('data-id') === `${rowClicked}${columnClicked}`) {
+            if (boardArray[columnClicked-1][rowClicked-1] === 1) {
+                e.classList.replace('square','p1');
+            } 
         }
     });
 }
@@ -63,7 +83,9 @@ function reset() {
     }
     squares.forEach(function(e) {
         e.classList.replace('p1','square');
+        e.classList.replace('p2','square');
     });
+    playerTurn = 1;
     createBoard();
 }
 
