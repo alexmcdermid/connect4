@@ -10,7 +10,7 @@ Array.from(squares).forEach(square=> {
 document.querySelector('.reset').addEventListener('click', reset);
 
 function clickSquare() {
-    let click = parseInt(this.dataset.id);
+    let click = parseInt(this.id);
     currentClick = click;
     update();
     render();
@@ -38,32 +38,63 @@ function createBoard() {
 function update() {
     //gets column clicked as single number/string
     let columnClicked = currentClick.toString()[1];
+    console.log(columnClicked);
     //sets to change to column in question in board array
-    toChange = boardArray[columnClicked-1];
+    let toChange = boardArray[columnClicked-1];
     //sets defaults bottom the the very bottom
     let bottom = 5;
 
     //checks for the bottom of the column in question and sets bottom to be the next free slot
-    for(let i = toChange.length-1; i>0; i--) {
+    for(let i = toChange.length; i>0; i--) {
         if(toChange[i] === 1 || toChange[i] === 2) {
             bottom = i-1;
         }
+    
+        
     }
     //fills the free slot in question with 1 or 2 depending on whichs players turn it is and changes the turn
-    if (playerTurn ===1) {
-        boardArray[columnClicked-1][bottom] = 1;
-        playerTurn*=-1;
-    } else {
-        boardArray[columnClicked-1][bottom] = 2;
-        playerTurn*=-1;
-    }
+    
+        if (playerTurn ===1) {
+            toChange[bottom] = 1;
+            playerTurn*=-1;
+        } else {
+            toChange[bottom] = 2;
+            playerTurn*=-1;
+        }
+    
     console.log(boardArray);
 
 }
 
 //render the data structure on to the html using DOM
 function render() {
-    
+    //'${}${}'
+    //we are using the JS DATA and pushing to the DOM
+   //loop column
+   //loop row
+   //if x ===1 || 2
+   //set this index to index of dom element to 1 or 2 
+   let toFill;
+   let toFillCol;
+   let toFillRow;
+   boardArray.forEach(function(innerArray, index) {
+       toFillCol = index+1;
+        innerArray.forEach(function(innerArrayItem, index) {
+            if (innerArrayItem === 1 ) {
+                toFillRow = index+1;
+                toFill = document.getElementById(`${toFillRow}${toFillCol}`);
+                toFill.classList.replace('square','p1');
+            } else  if (innerArrayItem === 2){
+                toFillRow = index+1;
+                toFill = document.getElementById(`${toFillRow}${toFillCol}`);
+                toFill.classList.replace('square','p2');
+            }
+        })
+        
+
+        //console.log(toFill);
+   })
+
 }
 
 //resets the board to the starting board and sets player turn to 1
