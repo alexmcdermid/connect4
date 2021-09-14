@@ -34,8 +34,10 @@ function createBoard() {
 //
 //results: this works! it updates the main data structure with 1 where clicked
 function update() {
-    //we broke this logic when updated the html data structure
-    let columnClicked = currentClick%7;
+    //lol it works only when clicking the bubble at the top of the column
+   // let columnClicked = currentClick%7;
+    let columnClicked = currentClick.toString()[1];
+    console.log(columnClicked);
        
     console.log(boardArray[columnClicked]);
     if (boardArray[columnClicked].includes(1) && boardArray[columnClicked].indexOf(1)!=0) {
@@ -43,15 +45,13 @@ function update() {
     } else {
         boardArray[columnClicked][5] = 1;
     }
-    console.log(currentClick);
     console.log(columnClicked);
     console.log(boardArray);
 }
 
-//todo render the data structure on to the html using DOM
-
+//render the data structure on to the html using DOM
 function render() {
-    let columnClicked = currentClick%7;
+    let columnClicked = currentClick.toString()[1];
     let toFill = boardArray[columnClicked].indexOf(1);
     squares.forEach(function(e) {
         if(e.getAttribute('data-id') == `${toFill}${columnClicked}`) {
