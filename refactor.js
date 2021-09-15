@@ -182,15 +182,16 @@ function checkColumn() {
             counter2++
         }
     });
-
     if(won === true)
         return
     else if (counter1>3) {
         messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
         won = true;
     }
     else if (counter2>3) {
         messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
         won = true;
     }
 }
@@ -220,10 +221,12 @@ function checkRow() {
         return
     else if (counter1>3) {
         messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
         won = true;
     }
     else if (counter2>3) {
         messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
         won = true;
     }
 }
@@ -238,10 +241,12 @@ function checkDiag() {
 function upperRight() {
     let columnToCheck = lastChanged.toString()[0];
     let rowToCheck = lastChanged.toString()[1];
+    console.log("column "+columnToCheck)
+    console.log("row "+rowToCheck)
     let counter1 = 0;
     let counter2 = 0;
-   
-  
+    let target = boardArray[columnToCheck-1][rowToCheck-1];
+    
 }
 
 function upperLeft() {
@@ -269,6 +274,8 @@ function reset() {
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
     messageEl.innerText = "";
     won = false;
+    messageEl.classList.remove('p1message');
+    messageEl.classList.remove('p2message');
     createBoard();
 }
 
