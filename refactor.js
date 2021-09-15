@@ -104,7 +104,7 @@ function update() {
     //TODO rebuild using arr.lastindexof 0
     for(let i = toChange.length; i>0; i--) {
         
-        if(toChange[i] === 1 || toChange[i] === 2) {
+        if(toChange[i] === 1 || toChange[i] === -1) {
             bottom = i-1;
         }
     }
@@ -117,7 +117,7 @@ function update() {
             toChange[bottom] = 1;
             playerTurn*=-1;
         } else {
-            toChange[bottom] = 2;
+            toChange[bottom] = -1;
             playerTurn*=-1;
         }
     
@@ -140,7 +140,7 @@ function render() {
                 toFill.classList.replace('square','p1');
                 toFill.classList.replace('p1hover', 'p1');
                 toFill.classList.replace('p2hover', 'p1');
-            } else  if (innerArrayItem === 2){
+            } else  if (innerArrayItem === -1){
                 toFillRow = index+1;
                 toFill = document.getElementById(`${toFillRow}${toFillCol}`);
                 toFill.classList.replace('square','p2');
@@ -171,14 +171,14 @@ function checkColumn() {
     
     //check to see if we have 1 or 2 in a row 4 times 
     arrayInQuestion.forEach(function(f) {
-        if (f === 2 && arrayInQuestion.lastIndexOf(2)!==5) {
+        if (f === -1 && arrayInQuestion.lastIndexOf(-1)!==5) {
             counter1--;
         } else if (f === 1) {
             counter1++
         }
         if (f === 1 && arrayInQuestion.lastIndexOf(1)!==5) {
             counter2--;
-        } else if (f === 2) {
+        } else if (f === -1) {
             counter2++
         }
     });
@@ -207,10 +207,10 @@ function checkRow() {
         if (f[rowToCheck-1] === 1) {
             counter1++
         }
-        if (f[rowToCheck-1] ===2) {
+        if (f[rowToCheck-1] ===-1) {
             counter1 = 0;
         }  
-        if (f[rowToCheck-1] === 2) {
+        if (f[rowToCheck-1] === -1) {
             counter2++
         }
         if (f[rowToCheck-1]===1) {
@@ -245,7 +245,7 @@ function upperRight() {
     console.log("row "+rowToCheck)
     let counter1 = 0;
     let counter2 = 0;
-    let target = boardArray[columnToCheck-1][rowToCheck-1];
+    let targetItemClicked = boardArray[columnToCheck-1][rowToCheck-1];
     
 }
 
@@ -260,6 +260,40 @@ function bottomRight() {
 function bottomLeft() {
 
 }
+
+let board = [
+    [0,0,0,0,0],
+    [],
+    [],
+    [],
+    []
+]
+
+function check(x,y) {
+    if (x<0) return false;
+    if (x > board[0].length) return false
+    if (y<0) return false;
+    if (y>board.length) return false;
+
+    if (item[x][y] = playerTurn) return true;
+}
+
+function checkdiaganoltest() {
+    let counter = 1;
+    let cooords = {c:1, r:2}
+
+    //checking up to the right
+    if (check(c+1,r-1)) {
+        counter++;
+        if (check( c+1, r-2)) {
+            counter++;
+        }
+    }
+
+    if (counter > 4)
+    console.log('win')
+}
+
 //resets the board to the starting board and sets player turn to 1
 function reset() {
     let l = boardArray.length;
