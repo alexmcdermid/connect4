@@ -9,6 +9,7 @@ let won = false;
 //event listeners
 Array.from(squares).forEach(square=> {
     square.addEventListener('click', clickSquare)
+    square.addEventListener('mouseover', hoverSquare)
 })
 
 document.querySelector('.reset').addEventListener('click', reset);
@@ -19,6 +20,55 @@ function clickSquare() {
     update();
     render();
     checkWin();
+    hoverSquareClick();
+}
+
+
+//hightlight hover square with tile being placed
+function hoverSquare(){
+    let hover = parseInt(this.id);
+        squares.forEach(function(e) {
+            if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+                if(e.getAttribute('id') == hover) {
+                    if (playerTurn === 1) {
+                        e.classList.remove('square');
+                        e.classList.add('p1hover');
+                    }
+                    if (playerTurn === -1) {
+                        e.classList.remove('square');
+                        e.classList.add('p2hover');
+                    }
+                }
+                if(e.getAttribute('id') != hover) {
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.add('square');
+                }
+            }
+        });
+}
+
+//handle updating hover color on click when cursor doesn't move and doesn't trigger hover update
+function hoverSquareClick(){
+    let hover = currentClick;
+    squares.forEach(function(e) {
+        if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+            if(e.getAttribute('id') == hover) {
+                if (playerTurn === 1) {
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.remove('square');
+                    e.classList.add('p1hover');
+                }
+                if (playerTurn === -1) {
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.remove('square');
+                    e.classList.add('p2hover');
+                }
+            }
+        }
+    });
 }
 
 //creates board on page refresh
@@ -54,7 +104,7 @@ function update() {
     //TODO rebuild using arr.lastindexof 0
     for(let i = toChange.length; i>0; i--) {
         
-        if(toChange[i] === 1 || toChange[i] === 2) {
+        if(toChange[i] === 1 || toChange[i] === -1) {
             bottom = i-1;
         }
     }
@@ -67,12 +117,9 @@ function update() {
             toChange[bottom] = 1;
             playerTurn*=-1;
         } else {
-            toChange[bottom] = 2;
+            toChange[bottom] = -1;
             playerTurn*=-1;
         }
-    
-    console.log(boardArray);
-
 }
 
 //render the data structure on to the html using DOM
@@ -88,10 +135,14 @@ function render() {
                 toFillRow = index+1;
                 toFill = document.getElementById(`${toFillRow}${toFillCol}`);
                 toFill.classList.replace('square','p1');
-            } else  if (innerArrayItem === 2){
+                toFill.classList.replace('p1hover', 'p1');
+                toFill.classList.replace('p2hover', 'p1');
+            } else  if (innerArrayItem === -1){
                 toFillRow = index+1;
                 toFill = document.getElementById(`${toFillRow}${toFillCol}`);
                 toFill.classList.replace('square','p2');
+                toFill.classList.replace('p1hover', 'p2');
+                toFill.classList.replace('p2hover', 'p2');
             } 
         })   
    })
@@ -105,64 +156,241 @@ function render() {
 function checkWin() {
     checkColumn()
     checkRow()
+    checkDiag()
+}
 
+//a function to check if given coords are in bound returns false if not and true if inbounds and item given === player turn
+//DO NOT DELETE ALL CHECKWIN FUNCTIONS RELY ON THIS
+function check(x,y) {
+    if (x<1) return false;
+    if (x > boardArray.length) return false
+    if (y<1) return false;
+    if (y>boardArray[0].length) return false;
     
+    if (boardArray[x-1][y-1] == playerTurn*-1) return true;
+}
 
-    //TODO check diag
+function checkRow(){
+    right();
+    left();
+}
+
+function right(){
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck+1,rowToCheck)) counter1++;
+        if(check(columnToCheck+2,rowToCheck)) counter1++;
+        if(check(columnToCheck+3,rowToCheck)) counter1++;
+
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck+1,rowToCheck)) counter2++;
+        if(check(columnToCheck+2,rowToCheck)) counter2++;
+        if(check(columnToCheck+3,rowToCheck)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
+}
+
+function left(){
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck-1,rowToCheck)) counter1++;
+        if(check(columnToCheck-2,rowToCheck)) counter1++;
+        if(check(columnToCheck-3,rowToCheck)) counter1++;
+
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck-1,rowToCheck)) counter2++;
+        if(check(columnToCheck-2,rowToCheck)) counter2++;
+        if(check(columnToCheck-3,rowToCheck)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
 }
 
 //checks columns for win condition 
 function checkColumn() {
-    console.log(lastChanged);
     let columnToCheck = lastChanged.toString()[0];
+    let arrayInQuestion = boardArray[columnToCheck-1];
     let counter1 = 0;
     let counter2 = 0;
+    
     //check to see if we have 1 or 2 in a row 4 times 
-
-    //TODO: WE WANT TO CHECK UP FROM THE CLICK SPOT AND DOWN FROM THE CLICK SPOT AND ITERATE
-
-    //NOTE THIS IS JUST CHECKING HOW MANY ARE IN THE ROW BUT IT WORKS
-    for (let i = 1; i<boardArray[columnToCheck-1].length;i++) {
-        if (boardArray[columnToCheck-1][i]===1) {
-            counter1++;
+    arrayInQuestion.forEach(function(f) {
+        if (f === -1 && arrayInQuestion.lastIndexOf(-1)!==5) {
+            counter1--;
+        } else if (f === 1) {
+            counter1++
         }
-        if (boardArray[columnToCheck-1][i]===2) {
-            counter2++;
+        if (f === 1 && arrayInQuestion.lastIndexOf(1)!==5) {
+            counter2--;
+        } else if (f === -1) {
+            counter2++
         }
-    }
-    //print message and set won to true to stop updaetes
+    });
     if(won === true)
         return
     else if (counter1>3) {
         messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
         won = true;
     }
     else if (counter2>3) {
         messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
         won = true;
     }
 }
 
-function checkRow() {
-    //checkright
-    //checkleft
+function checkDiag() {
+    upperRight();
+    upperLeft();
+    bottomRight();
+    bottomLeft();
 }
 
 function upperRight() {
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck+1,rowToCheck-1)) counter1++;
+        if(check(columnToCheck+2,rowToCheck-2)) counter1++;
+        if(check(columnToCheck+3,rowToCheck-3)) counter1++;
 
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck+1,rowToCheck-1)) counter2++;
+        if(check(columnToCheck+2,rowToCheck-2)) counter2++;
+        if(check(columnToCheck+3,rowToCheck-3)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
 }
 
 function upperLeft() {
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck-1,rowToCheck-1)) counter1++;
+        if(check(columnToCheck-2,rowToCheck-2)) counter1++;
+        if(check(columnToCheck-3,rowToCheck-3)) counter1++;
 
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck-1,rowToCheck-1)) counter2++;
+        if(check(columnToCheck-2,rowToCheck-2)) counter2++;
+        if(check(columnToCheck-3,rowToCheck-3)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
 }
 
-function bottomRight() {
 
+function bottomRight() {
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck+1,rowToCheck+1)) counter1++;
+        if(check(columnToCheck+2,rowToCheck+2)) counter1++;
+        if(check(columnToCheck+3,rowToCheck+3)) counter1++;
+
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck+1,rowToCheck+1)) counter2++;
+        if(check(columnToCheck+2,rowToCheck+2)) counter2++;
+        if(check(columnToCheck+3,rowToCheck+3)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
 }
 
 function bottomLeft() {
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck-1,rowToCheck+1)) counter1++;
+        if(check(columnToCheck-2,rowToCheck+2)) counter1++;
+        if(check(columnToCheck-3,rowToCheck+3)) counter1++;
 
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck-1,rowToCheck+1)) counter2++;
+        if(check(columnToCheck-2,rowToCheck+2)) counter2++;
+        if(check(columnToCheck-3,rowToCheck+3)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
 }
+
 //resets the board to the starting board and sets player turn to 1
 function reset() {
     let l = boardArray.length;
@@ -177,6 +405,8 @@ function reset() {
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
     messageEl.innerText = "";
     won = false;
+    messageEl.classList.remove('p1message');
+    messageEl.classList.remove('p2message');
     createBoard();
 }
 
