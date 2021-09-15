@@ -9,6 +9,7 @@ let won = false;
 //event listeners
 Array.from(squares).forEach(square=> {
     square.addEventListener('click', clickSquare)
+    square.addEventListener('mouseover', hoverSquare)
 })
 
 document.querySelector('.reset').addEventListener('click', reset);
@@ -18,7 +19,56 @@ function clickSquare() {
     currentClick = click;
     update();
     render();
+    hoverSquareClick();
     checkWin();
+}
+
+
+//hightlight hover square with tile being placed
+function hoverSquare(){
+    let hover = parseInt(this.id);
+        squares.forEach(function(e) {
+            if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+                if(e.getAttribute('id') == hover) {
+                    if (playerTurn === 1) {
+                        e.classList.remove('square');
+                        e.classList.add('p1hover');
+                    }
+                    if (playerTurn === -1) {
+                        e.classList.remove('square');
+                        e.classList.add('p2hover');
+                    }
+                }
+                if(e.getAttribute('id') != hover) {
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.add('square');
+                }
+            }
+        });
+}
+
+//handle updating hover color on click when cursor doesn't move and doesn't trigger hover update
+function hoverSquareClick(){
+    let hover = currentClick;
+    squares.forEach(function(e) {
+        if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+            if(e.getAttribute('id') == hover) {
+                if (playerTurn === 1) {
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.remove('square');
+                    e.classList.add('p1hover');
+                }
+                if (playerTurn === -1) {
+                    e.classList.remove('p1hover');
+                    e.classList.remove('p2hover');
+                    e.classList.remove('square');
+                    e.classList.add('p2hover');
+                }
+            }
+        }
+    });
 }
 
 //creates board on page refresh
@@ -145,6 +195,7 @@ function checkColumn() {
 }
 
 //i thinnk this is working need to bugcheck
+//this is also a better solution that the column logic if it is working without bugs
 function checkRow() {
     let columnToCheck = lastChanged.toString()[0];
     let rowToCheck = lastChanged.toString()[1];
