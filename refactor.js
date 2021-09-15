@@ -19,8 +19,8 @@ function clickSquare() {
     currentClick = click;
     update();
     render();
-    hoverSquareClick();
     checkWin();
+    hoverSquareClick();
 }
 
 
@@ -239,14 +239,9 @@ function checkDiag() {
 }
 
 function upperRight() {
-    let columnToCheck = lastChanged.toString()[0];
-    let rowToCheck = lastChanged.toString()[1];
-    console.log("column "+columnToCheck)
-    console.log("row "+rowToCheck)
-    let counter1 = 0;
-    let counter2 = 0;
-    let targetItemClicked = boardArray[columnToCheck-1][rowToCheck-1];
     
+
+
 }
 
 function upperLeft() {
@@ -261,38 +256,31 @@ function bottomLeft() {
 
 }
 
-let board = [
-    [0,0,0,0,0],
-    [],
-    [],
-    [],
-    []
-]
-
+//a function to check if given coords are in bound returns false if not and true if inbounds and item given === player turn
 function check(x,y) {
-    if (x<0) return false;
-    if (x > board[0].length) return false
-    if (y<0) return false;
-    if (y>board.length) return false;
-
-    if (item[x][y] = playerTurn) return true;
+    if (x<1) return false;
+    if (x > boardArray.length) return false
+    if (y<1) return false;
+    if (y>boardArray[0].length) return false;
+    
+    if (boardArray[x-1][y-1] === playerTurn*-1) return true;
 }
 
-function checkdiaganoltest() {
-    let counter = 1;
-    let cooords = {c:1, r:2}
+// function checkdiaganoltest() {
+//     let counter = 1;
+//     let cooords = {c:1, r:2}
 
-    //checking up to the right
-    if (check(c+1,r-1)) {
-        counter++;
-        if (check( c+1, r-2)) {
-            counter++;
-        }
-    }
+//     //checking up to the right
+//     if (check(c+1,r-1)) {
+//         counter++;
+//         if (check( c+1, r-2)) {
+//             counter++;
+//         }
+//     }
 
-    if (counter > 4)
-    console.log('win')
-}
+//     if (counter > 4)
+//     console.log('win')
+// }
 
 //resets the board to the starting board and sets player turn to 1
 function reset() {
