@@ -176,8 +176,63 @@ function checkRow(){
 }
 
 function right(){
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck+1,rowToCheck)) counter1++;
+        if(check(columnToCheck+2,rowToCheck)) counter1++;
+        if(check(columnToCheck+3,rowToCheck)) counter1++;
 
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck+1,rowToCheck)) counter2++;
+        if(check(columnToCheck+2,rowToCheck)) counter2++;
+        if(check(columnToCheck+3,rowToCheck)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
 }
+
+function left(){
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck-1,rowToCheck)) counter1++;
+        if(check(columnToCheck-2,rowToCheck)) counter1++;
+        if(check(columnToCheck-3,rowToCheck)) counter1++;
+
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck-1,rowToCheck)) counter2++;
+        if(check(columnToCheck-2,rowToCheck)) counter2++;
+        if(check(columnToCheck-3,rowToCheck)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
+}
+
 //i thinnk this is working need to bugcheck
 //this is also a better solution that the column logic if it is working without bugs
 // function checkRow() {
