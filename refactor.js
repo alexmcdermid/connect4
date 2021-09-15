@@ -170,6 +170,51 @@ function check(x,y) {
     if (boardArray[x-1][y-1] == playerTurn*-1) return true;
 }
 
+function checkRow(){
+    right();
+    left();
+}
+
+function right(){
+
+}
+//i thinnk this is working need to bugcheck
+//this is also a better solution that the column logic if it is working without bugs
+// function checkRow() {
+//     //THERE ARE BUGS HERE
+//     //not properly counting rows if the row isnt the botton row
+//     let rowToCheck = lastChanged.toString()[1];
+//     let counter1 = 0;
+//     let counter2 = 0;
+
+//     boardArray.forEach(function(f) {
+//         if (f[rowToCheck-1] === 1) {
+//             counter1++
+//         }
+//         if (f[rowToCheck-1] ===-1) {
+//             counter1 = 0;
+//         }  
+//         if (f[rowToCheck-1] === -1) {
+//             counter2++
+//         }
+//         if (f[rowToCheck-1]===1) {
+//             counter2 = 0;
+//         } 
+//     });
+//     if(won === true)
+//         return
+//     else if (counter1>3) {
+//         messageEl.innerText = "Congratulations Player 1! You win.";
+//         messageEl.classList.add('p1message');
+//         won = true;
+//     }
+//     else if (counter2>3) {
+//         messageEl.innerText = "Congratulations Player 2! You win.";
+//         messageEl.classList.add('p2message');
+//         won = true;
+//     }
+// }
+
 //checks columns for win condition 
 function checkColumn() {
     let columnToCheck = lastChanged.toString()[0];
@@ -204,43 +249,6 @@ function checkColumn() {
     }
 }
 
-//i thinnk this is working need to bugcheck
-//this is also a better solution that the column logic if it is working without bugs
-function checkRow() {
-    //THERE ARE BUGS HERE
-    //not properly counting rows if the row isnt the botton row
-    let rowToCheck = lastChanged.toString()[1];
-    let counter1 = 0;
-    let counter2 = 0;
-
-    boardArray.forEach(function(f) {
-        if (f[rowToCheck-1] === 1) {
-            counter1++
-        }
-        if (f[rowToCheck-1] ===-1) {
-            counter1 = 0;
-        }  
-        if (f[rowToCheck-1] === -1) {
-            counter2++
-        }
-        if (f[rowToCheck-1]===1) {
-            counter2 = 0;
-        } 
-    });
-    if(won === true)
-        return
-    else if (counter1>3) {
-        messageEl.innerText = "Congratulations Player 1! You win.";
-        messageEl.classList.add('p1message');
-        won = true;
-    }
-    else if (counter2>3) {
-        messageEl.innerText = "Congratulations Player 2! You win.";
-        messageEl.classList.add('p2message');
-        won = true;
-    }
-}
-
 function checkDiag() {
     upperRight();
     upperLeft();
@@ -255,18 +263,14 @@ function upperRight() {
     let counter2 = 0;
     if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
         counter1++;
-        if(check(columnToCheck+1,rowToCheck-1)) {
-            counter1++;
-        }
+        if(check(columnToCheck+1,rowToCheck-1)) counter1++;
         if(check(columnToCheck+2,rowToCheck-2)) counter1++;
         if(check(columnToCheck+3,rowToCheck-3)) counter1++;
 
     }
     if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
         counter2++;
-        if(check(columnToCheck+1,rowToCheck-1)) {
-            counter2++;
-        }
+        if(check(columnToCheck+1,rowToCheck-1)) counter2++;
         if(check(columnToCheck+2,rowToCheck-2)) counter2++;
         if(check(columnToCheck+3,rowToCheck-3)) counter2++;
 
@@ -288,18 +292,14 @@ function upperLeft() {
     let counter2 = 0;
     if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
         counter1++;
-        if(check(columnToCheck-1,rowToCheck-1)) {
-            counter1++;
-        }
+        if(check(columnToCheck-1,rowToCheck-1)) counter1++;
         if(check(columnToCheck-2,rowToCheck-2)) counter1++;
         if(check(columnToCheck-3,rowToCheck-3)) counter1++;
 
     }
     if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
         counter2++;
-        if(check(columnToCheck-1,rowToCheck-1)) {
-            counter2++;
-        }
+        if(check(columnToCheck-1,rowToCheck-1)) counter2++;
         if(check(columnToCheck-2,rowToCheck-2)) counter2++;
         if(check(columnToCheck-3,rowToCheck-3)) counter2++;
 
@@ -322,18 +322,14 @@ function bottomRight() {
     let counter2 = 0;
     if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
         counter1++;
-        if(check(columnToCheck+1,rowToCheck+1)) {
-            counter1++;
-        }
+        if(check(columnToCheck+1,rowToCheck+1)) counter1++;
         if(check(columnToCheck+2,rowToCheck+2)) counter1++;
         if(check(columnToCheck+3,rowToCheck+3)) counter1++;
 
     }
     if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
         counter2++;
-        if(check(columnToCheck+1,rowToCheck+1)) {
-            counter2++;
-        }
+        if(check(columnToCheck+1,rowToCheck+1)) counter2++;
         if(check(columnToCheck+2,rowToCheck+2)) counter2++;
         if(check(columnToCheck+3,rowToCheck+3)) counter2++;
 
@@ -355,18 +351,14 @@ function bottomLeft() {
     let counter2 = 0;
     if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
         counter1++;
-        if(check(columnToCheck-1,rowToCheck+1)) {
-            counter1++;
-        }
+        if(check(columnToCheck-1,rowToCheck+1)) counter1++;
         if(check(columnToCheck-2,rowToCheck+2)) counter1++;
         if(check(columnToCheck-3,rowToCheck+3)) counter1++;
 
     }
     if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
         counter2++;
-        if(check(columnToCheck-1,rowToCheck+1)) {
-            counter2++;
-        }
+        if(check(columnToCheck-1,rowToCheck+1)) counter2++;
         if(check(columnToCheck-2,rowToCheck+2)) counter2++;
         if(check(columnToCheck-3,rowToCheck+3)) counter2++;
 
