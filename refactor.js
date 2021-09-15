@@ -138,10 +138,14 @@ function render() {
                 toFillRow = index+1;
                 toFill = document.getElementById(`${toFillRow}${toFillCol}`);
                 toFill.classList.replace('square','p1');
+                toFill.classList.replace('p1hover', 'p1');
+                toFill.classList.replace('p2hover', 'p1');
             } else  if (innerArrayItem === 2){
                 toFillRow = index+1;
                 toFill = document.getElementById(`${toFillRow}${toFillCol}`);
                 toFill.classList.replace('square','p2');
+                toFill.classList.replace('p1hover', 'p2');
+                toFill.classList.replace('p2hover', 'p2');
             } 
         })   
    })
@@ -155,10 +159,7 @@ function render() {
 function checkWin() {
     checkColumn()
     checkRow()
-
-    
-
-    //TODO check diag
+    checkDiag()
 }
 
 //checks columns for win condition 
@@ -197,26 +198,19 @@ function checkColumn() {
 //i thinnk this is working need to bugcheck
 //this is also a better solution that the column logic if it is working without bugs
 function checkRow() {
-    let columnToCheck = lastChanged.toString()[0];
     let rowToCheck = lastChanged.toString()[1];
     let counter1 = 0;
     let counter2 = 0;
-    console.log("ctc"+columnToCheck)
-    console.log("rtc"+rowToCheck)
 
     boardArray.forEach(function(f) {
-        console.log(f);
-        console.log(f[rowToCheck-1]);
         if (f[rowToCheck-1] === 1) {
             counter1++
-            console.log("counter1"+counter1)
         }
         if (f[rowToCheck-1] ===2) {
             counter1 = 0;
         }  
         if (f[rowToCheck-1] === 2) {
             counter2++
-            console.log("counter2"+counter2)
         }
         if (f[rowToCheck-1]===1) {
             counter2 = 0;
@@ -234,7 +228,23 @@ function checkRow() {
     }
 }
 
+function checkDiag() {
+    upperRight();
+    upperLeft();
+    bottomRight();
+    bottomLeft();
+}
+
 function upperRight() {
+    let columnToCheck = lastChanged.toString()[0];
+    let rowToCheck = lastChanged.toString()[1];
+    let counter1 = 0;
+    let counter2 = 0;
+    console.log(columnToCheck)
+    console.log(rowToCheck)
+    if (boardArray[rowToCheck-1][columnToCheck-1] === 1 && boardArray[rowToCheck][columnToCheck] === 1) {
+        console.log("win");
+    }
 
 }
 
