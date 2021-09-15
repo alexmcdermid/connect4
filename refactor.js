@@ -120,9 +120,6 @@ function update() {
             toChange[bottom] = -1;
             playerTurn*=-1;
         }
-    
-    console.log(boardArray);
-
 }
 
 //render the data structure on to the html using DOM
@@ -238,24 +235,6 @@ function checkDiag() {
     bottomLeft();
 }
 
-function upperRight() {
-    
-
-
-}
-
-function upperLeft() {
-
-}
-
-function bottomRight() {
-
-}
-
-function bottomLeft() {
-
-}
-
 //a function to check if given coords are in bound returns false if not and true if inbounds and item given === player turn
 function check(x,y) {
     if (x<1) return false;
@@ -263,24 +242,141 @@ function check(x,y) {
     if (y<1) return false;
     if (y>boardArray[0].length) return false;
     
-    if (boardArray[x-1][y-1] === playerTurn*-1) return true;
+    if (boardArray[x-1][y-1] == playerTurn*-1) return true;
 }
 
-// function checkdiaganoltest() {
-//     let counter = 1;
-//     let cooords = {c:1, r:2}
+function upperRight() {
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck+1,rowToCheck-1)) {
+            counter1++;
+        }
+        if(check(columnToCheck+2,rowToCheck-2)) counter1++;
+        if(check(columnToCheck+3,rowToCheck-3)) counter1++;
 
-//     //checking up to the right
-//     if (check(c+1,r-1)) {
-//         counter++;
-//         if (check( c+1, r-2)) {
-//             counter++;
-//         }
-//     }
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck+1,rowToCheck-1)) {
+            counter2++;
+        }
+        if(check(columnToCheck+2,rowToCheck-2)) counter2++;
+        if(check(columnToCheck+3,rowToCheck-3)) counter2++;
 
-//     if (counter > 4)
-//     console.log('win')
-// }
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
+}
+
+function upperLeft() {
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck-1,rowToCheck-1)) {
+            counter1++;
+        }
+        if(check(columnToCheck-2,rowToCheck-2)) counter1++;
+        if(check(columnToCheck-3,rowToCheck-3)) counter1++;
+
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck-1,rowToCheck-1)) {
+            counter2++;
+        }
+        if(check(columnToCheck-2,rowToCheck-2)) counter2++;
+        if(check(columnToCheck-3,rowToCheck-3)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
+}
+
+
+function bottomRight() {
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck+1,rowToCheck+1)) {
+            counter1++;
+        }
+        if(check(columnToCheck+2,rowToCheck+2)) counter1++;
+        if(check(columnToCheck+3,rowToCheck+3)) counter1++;
+
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck+1,rowToCheck+1)) {
+            counter2++;
+        }
+        if(check(columnToCheck+2,rowToCheck+2)) counter2++;
+        if(check(columnToCheck+3,rowToCheck+3)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
+}
+
+function bottomLeft() {
+    let columnToCheck = parseInt(lastChanged.toString()[0]);
+    let rowToCheck = parseInt(lastChanged.toString()[1]);
+    let counter1 = 0;
+    let counter2 = 0;
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===1) {
+        counter1++;
+        if(check(columnToCheck-1,rowToCheck+1)) {
+            counter1++;
+        }
+        if(check(columnToCheck-2,rowToCheck+2)) counter1++;
+        if(check(columnToCheck-3,rowToCheck+3)) counter1++;
+
+    }
+    if (check(columnToCheck,rowToCheck)&&boardArray[columnToCheck-1][rowToCheck-1]===-1) {
+        counter2++;
+        if(check(columnToCheck-1,rowToCheck+1)) {
+            counter2++;
+        }
+        if(check(columnToCheck-2,rowToCheck+2)) counter2++;
+        if(check(columnToCheck-3,rowToCheck+3)) counter2++;
+
+    }
+    if (counter1>=4) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        messageEl.classList.add('p1message');
+        won = true;    }
+    if (counter2>=4) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        messageEl.classList.add('p2message');
+        won = true;    }
+}
 
 //resets the board to the starting board and sets player turn to 1
 function reset() {
