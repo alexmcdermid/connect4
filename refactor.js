@@ -159,6 +159,17 @@ function checkWin() {
     checkDiag()
 }
 
+//a function to check if given coords are in bound returns false if not and true if inbounds and item given === player turn
+//DO NOT DELETE ALL CHECKWIN FUNCTIONS RELY ON THIS
+function check(x,y) {
+    if (x<1) return false;
+    if (x > boardArray.length) return false
+    if (y<1) return false;
+    if (y>boardArray[0].length) return false;
+    
+    if (boardArray[x-1][y-1] == playerTurn*-1) return true;
+}
+
 //checks columns for win condition 
 function checkColumn() {
     let columnToCheck = lastChanged.toString()[0];
@@ -196,6 +207,8 @@ function checkColumn() {
 //i thinnk this is working need to bugcheck
 //this is also a better solution that the column logic if it is working without bugs
 function checkRow() {
+    //THERE ARE BUGS HERE
+    //not properly counting rows if the row isnt the botton row
     let rowToCheck = lastChanged.toString()[1];
     let counter1 = 0;
     let counter2 = 0;
@@ -233,16 +246,6 @@ function checkDiag() {
     upperLeft();
     bottomRight();
     bottomLeft();
-}
-
-//a function to check if given coords are in bound returns false if not and true if inbounds and item given === player turn
-function check(x,y) {
-    if (x<1) return false;
-    if (x > boardArray.length) return false
-    if (y<1) return false;
-    if (y>boardArray[0].length) return false;
-    
-    if (boardArray[x-1][y-1] == playerTurn*-1) return true;
 }
 
 function upperRight() {
