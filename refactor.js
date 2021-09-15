@@ -113,24 +113,25 @@ function checkWin() {
 
 //checks columns for win condition 
 function checkColumn() {
-    console.log(lastChanged);
     let columnToCheck = lastChanged.toString()[0];
+    let arrayInQuestion = boardArray[columnToCheck-1];
     let counter1 = 0;
     let counter2 = 0;
+    
     //check to see if we have 1 or 2 in a row 4 times 
-
-    //TODO: WE WANT TO CHECK UP FROM THE CLICK SPOT AND DOWN FROM THE CLICK SPOT AND ITERATE
-
-    //NOTE THIS IS JUST CHECKING HOW MANY ARE IN THE ROW BUT IT WORKS
-    for (let i = 1; i<boardArray[columnToCheck-1].length;i++) {
-        if (boardArray[columnToCheck-1][i]===1) {
-            counter1++;
+    arrayInQuestion.forEach(function(f) {
+        if (f === 2 && arrayInQuestion.lastIndexOf(2)!==5) {
+            counter1--;
+        } else if (f === 1) {
+            counter1++
         }
-        if (boardArray[columnToCheck-1][i]===2) {
-            counter2++;
+        if (f === 1 && arrayInQuestion.lastIndexOf(1)!==5) {
+            counter2--;
+        } else if (f === 2) {
+            counter2++
         }
-    }
-    //print message and set won to true to stop updaetes
+    });
+
     if(won === true)
         return
     else if (counter1>3) {
