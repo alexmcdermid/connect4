@@ -240,12 +240,8 @@ function upperRight() {
     let rowToCheck = lastChanged.toString()[1];
     let counter1 = 0;
     let counter2 = 0;
-    console.log(columnToCheck)
-    console.log(rowToCheck)
-    if (boardArray[rowToCheck-1][columnToCheck-1] === 1 && boardArray[rowToCheck][columnToCheck] === 1) {
-        console.log("win");
-    }
-
+   
+  
 }
 
 function upperLeft() {
