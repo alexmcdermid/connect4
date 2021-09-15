@@ -154,6 +154,7 @@ function render() {
 }
 
 function checkWin() {
+    checkTie()
     checkColumn()
     checkRow()
     checkDiag()
@@ -168,6 +169,18 @@ function check(x,y) {
     if (y>boardArray[0].length) return false;
     
     if (boardArray[x-1][y-1] == playerTurn*-1) return true;
+}
+
+function checkTie() {
+    let count = 0;
+    boardArray.forEach(function(f) {
+        if (f.lastIndexOf(0)===-1)
+            count++;
+    });
+    if (count >=7) {
+        messageEl.innerText = "It's a tie! Click reset to play again.";
+        won = true;
+    }
 }
 
 function checkRow(){
