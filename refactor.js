@@ -144,9 +144,43 @@ function checkColumn() {
     }
 }
 
+//i thinnk this is working need to bugcheck
 function checkRow() {
-    //checkright
-    //checkleft
+    let columnToCheck = lastChanged.toString()[0];
+    let rowToCheck = lastChanged.toString()[1];
+    let counter1 = 0;
+    let counter2 = 0;
+    console.log("ctc"+columnToCheck)
+    console.log("rtc"+rowToCheck)
+
+    boardArray.forEach(function(f) {
+        console.log(f);
+        console.log(f[rowToCheck-1]);
+        if (f[rowToCheck-1] === 1) {
+            counter1++
+            console.log("counter1"+counter1)
+        }
+        if (f[rowToCheck-1] ===2) {
+            counter1 = 0;
+        }  
+        if (f[rowToCheck-1] === 2) {
+            counter2++
+            console.log("counter2"+counter2)
+        }
+        if (f[rowToCheck-1]===1) {
+            counter2 = 0;
+        } 
+    });
+    if(won === true)
+        return
+    else if (counter1>3) {
+        messageEl.innerText = "Congratulations Player 1! You win.";
+        won = true;
+    }
+    else if (counter2>3) {
+        messageEl.innerText = "Congratulations Player 2! You win.";
+        won = true;
+    }
 }
 
 function upperRight() {
