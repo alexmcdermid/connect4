@@ -1,6 +1,16 @@
 # connect4 webapp
-## branches: main or ghpages
+## Description:
+### Connect-Four is a tic-tac-toe-like two-player game in which players alternately place pieces on a vertical board 7 columns across and 6 rows high. Each player uses pieces of a particular color (commonly black and red, or sometimes yellow and red), and the object is to be the first to obtain four pieces in a horizontal, vertical, or diagonal line. Because the board is vertical, pieces inserted in a given column always drop to the lowest unoccupied row of that column. As soon as a column contains 6 pieces, it is full and no other piece can be placed in the column.
+# TODO ADD SCREENSHOTS HERES
+## Technologies Used:
+### HTML, CSS, JS
+## Getting Started:
+### Game Link: https://alexmcdermid.github.io/connect4/
+### Github Repo Link: https://github.com/alexmcdermid/connect4
+### Please note that player one always starts first and there is no computer AI so please play with a friend! Please also note that the repo contains the original project (old.html, old.js) and the current live project with a new and improved datatype! (index.html and refactor.js) Both projects utilize the same css file. 
 ## Pseudocode:
+## Next Steps:
+### Since a lot of the working time this week was dedicated from refactoring the original attempt at the projects datatype from an array (single array with numbers) to a nested array (array containing an array of numbers) to allow for self checking iterative win logic. It would make sense to make use of this. Because we did this, we could now add options for game board size allowing for a larger or smaller board and the win logic would still work as it always just checks if there are four of either token placed in a row (vertically, horizontally or diagonaly).
 ### Create datatype for what is in each slot
 * 2d array in javascript would work quite well. 
 * Each array could be a position with 3 items representing empty, p1 token, p2 token.
