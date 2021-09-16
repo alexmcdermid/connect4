@@ -2,7 +2,7 @@ body {
     background-color:lightsteelblue;
 }
 .board { 
-    border:1px solid black; 
+    border: 1px solid black; 
     display:flex; 
     flex-wrap:wrap; 
     height:552px; 
@@ -13,11 +13,12 @@ body {
 .board div {
     height:80px; 
     width:80px; 
-    margin:6px;
+    margin:5px;
+    border: 1px solid black;
     border-radius:40px 
  }
 .square{ 
-    background: lightblue; 
+    background: lightsteelblue; 
 } 
 .p1 {
     background: red;
@@ -47,7 +48,7 @@ h1 {
     font-size: 40px;
     padding: 16px 24px;
     border-radius: 10%;
-    border: 2px solid blue;
+    border: 2px solid black;
     background-color: lightblue;
 }
 .message {
