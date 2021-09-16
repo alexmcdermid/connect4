@@ -11,10 +11,10 @@
 ### Game Link: https://alexmcdermid.github.io/connect4/
 ### Github Repo Link: https://github.com/alexmcdermid/connect4
 ### Please note that player one always starts first and there is no computer AI so please play with a friend! Please also note that the repo contains the original project (old.html, old.js) and the current live project with a new and improved datatype! (index.html and refactor.js) Both projects utilize the same css file. 
-## Pseudocode:
 ## Next Steps:
 ### Since a lot of the working time this week was dedicated from refactoring the original attempt at the projects datatype from an array (single array with numbers) to a nested array (array containing an array of numbers) to allow for self checking iterative win logic. It would make sense to make use of this. Because we did this, we could now add options for game board size allowing for a larger or smaller board and the win logic would still work as it always just checks if there are four of either token placed in a row (vertically, horizontally or diagonaly).
 ### Other possible additions in the future could be an option to play against a computer AI if only one player is playing. 
+# Pseudocode:
 ### Create datatype for what is in each slot
 * 2d array in javascript would work quite well. 
 * Each array could be a position with 3 items representing empty, p1 token, p2 token.
