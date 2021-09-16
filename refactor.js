@@ -215,7 +215,7 @@ function checkTie() {
         if (f.lastIndexOf(0)===-1)
             count++;
     });
-    if (count >=7) {
+    if (count >=7 && won === false) {
         messageEl.innerText = "It's a tie! Click reset to play again.";
         won = true;
     }
@@ -245,11 +245,11 @@ function right(){
         if(check(columnToCheck+3,rowToCheck)) counter2++;
 
     }
-    if (counter1>=4) {
+    if (counter1>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         messageEl.classList.add('p1message');
         won = true;    }
-    if (counter2>=4) {
+    if (counter2>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;    }
@@ -274,11 +274,11 @@ function left(){
         if(check(columnToCheck-3,rowToCheck)) counter2++;
 
     }
-    if (counter1>=4) {
+    if (counter1>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         messageEl.classList.add('p1message');
         won = true;    }
-    if (counter2>=4) {
+    if (counter2>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;    }
@@ -308,11 +308,11 @@ function up() {
         if(check(columnToCheck,rowToCheck-3)) counter2++;
 
     }
-    if (counter1>=4) {
+    if (counter1>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         messageEl.classList.add('p1message');
         won = true;    }
-    if (counter2>=4) {
+    if (counter2>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;    }
@@ -337,11 +337,11 @@ function down() {
         if(check(columnToCheck,rowToCheck+3)) counter2++;
 
     }
-    if (counter1>=4) {
+    if (counter1>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         messageEl.classList.add('p1message');
         won = true;    }
-    if (counter2>=4) {
+    if (counter2>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;    }
@@ -373,11 +373,11 @@ function upperRight() {
         if(check(columnToCheck+3,rowToCheck-3)) counter2++;
 
     }
-    if (counter1>=4) {
+    if (counter1>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         messageEl.classList.add('p1message');
         won = true;    }
-    if (counter2>=4) {
+    if (counter2>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;    }
@@ -402,11 +402,11 @@ function upperLeft() {
         if(check(columnToCheck-3,rowToCheck-3)) counter2++;
 
     }
-    if (counter1>=4) {
+    if (counter1>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         messageEl.classList.add('p1message');
         won = true;    }
-    if (counter2>=4) {
+    if (counter2>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;    }
@@ -432,11 +432,11 @@ function bottomRight() {
         if(check(columnToCheck+3,rowToCheck+3)) counter2++;
 
     }
-    if (counter1>=4) {
+    if (counter1>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         messageEl.classList.add('p1message');
         won = true;    }
-    if (counter2>=4) {
+    if (counter2>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;    }
@@ -461,11 +461,11 @@ function bottomLeft() {
         if(check(columnToCheck-3,rowToCheck+3)) counter2++;
 
     }
-    if (counter1>=4) {
+    if (counter1>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 1! You win.";
         messageEl.classList.add('p1message');
         won = true;    }
-    if (counter2>=4) {
+    if (counter2>=4 && won === false) {
         messageEl.innerText = "Congratulations Player 2! You win.";
         messageEl.classList.add('p2message');
         won = true;    }
