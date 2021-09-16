@@ -53,24 +53,26 @@ function hoverSquare(){
 //handle updating hover color on click when cursor doesn't move and doesn't trigger hover update
 function hoverSquareClick(){
     let hover = currentClick;
-    squares.forEach(function(e) {
-        if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
-            if(e.getAttribute('id') == hover) {
-                if (playerTurn === 1) {
-                    e.classList.remove('p1hover');
-                    e.classList.remove('p2hover');
-                    e.classList.remove('square');
-                    e.classList.add('p1hover');
-                }
-                if (playerTurn === -1) {
-                    e.classList.remove('p1hover');
-                    e.classList.remove('p2hover');
-                    e.classList.remove('square');
-                    e.classList.add('p2hover');
+    if (won === false) {
+        squares.forEach(function(e) {
+            if (!e.classList.contains('p1')&&!e.classList.contains('p2')) {
+                if(e.getAttribute('id') == hover) {
+                    if (playerTurn === 1) {
+                        e.classList.remove('p1hover');
+                        e.classList.remove('p2hover');
+                        e.classList.remove('square');
+                        e.classList.add('p1hover');
+                    }
+                    if (playerTurn === -1) {
+                        e.classList.remove('p1hover');
+                        e.classList.remove('p2hover');
+                        e.classList.remove('square');
+                        e.classList.add('p2hover');
+                    }
                 }
             }
-        }
-    });
+        });
+    }
 }
 
 //creates board on page refresh
