@@ -139,7 +139,7 @@ function update() {
     if(toChange.lastIndexOf(0) === -1)
         return;
     //checks for the bottom of the column in question and sets bottom to be the next free slot
-    //TODO rebuild using arr.lastindexof 0
+    //could rebuild using arr.lastindexof 0
     for(let i = toChange.length; i>0; i--) {
         
         if(toChange[i] === 1 || toChange[i] === -1) {
