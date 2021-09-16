@@ -150,7 +150,7 @@ function update() {
     //the last changed token slot DO NOT REMOVE USED FOR CHECK WIN LOGIC
     lastChanged = `${columnClicked}${bottom+1}`;
     //fills the free slot in question with 1 or 2 depending on whichs players turn it is and changes the turn
-    
+    if (won === false){
         if (playerTurn ===1) {
             toChange[bottom] = 1;
             playerTurn*=-1;
@@ -158,6 +158,7 @@ function update() {
             toChange[bottom] = -1;
             playerTurn*=-1;
         }
+    }
 }
 
 //render the data structure on to the html using DOM
