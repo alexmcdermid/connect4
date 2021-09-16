@@ -11,6 +11,7 @@
 ## Pseudocode:
 ## Next Steps:
 ### Since a lot of the working time this week was dedicated from refactoring the original attempt at the projects datatype from an array (single array with numbers) to a nested array (array containing an array of numbers) to allow for self checking iterative win logic. It would make sense to make use of this. Because we did this, we could now add options for game board size allowing for a larger or smaller board and the win logic would still work as it always just checks if there are four of either token placed in a row (vertically, horizontally or diagonaly).
+### Other possible additions in the future could be an option to play against a computer AI if only one player is playing. 
 ### Create datatype for what is in each slot
 * 2d array in javascript would work quite well. 
 * Each array could be a position with 3 items representing empty, p1 token, p2 token.

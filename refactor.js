@@ -1,6 +1,7 @@
 //variables
 let boardArray = [];
 let squares = document.querySelectorAll(".board div");
+let upperEl = document.querySelectorAll('.upper div')
 let playerTurnEl = document.querySelector("h1");
 let messageEl = document.querySelector(".message");
 let playerTurn = 1;
@@ -48,6 +49,20 @@ function hoverSquare(){
                 }
             }
         });
+      //deals with upper hover
+      upperEl.forEach(function(f) {
+        if (f.getAttribute('id') === hover.toString()[1]&&playerTurn===1) {
+            f.classList.replace('square','p1hover')
+        }
+        if (f.getAttribute('id') === hover.toString()[1]&&playerTurn===-1) {
+            f.classList.replace('square','p2hover')
+        }
+        if(f.getAttribute('id') != hover.toString()[1]) {
+            f.classList.remove('p1hover');
+            f.classList.remove('p2hover');
+            f.classList.add('square');
+        }
+    })
 }
 
 //handle updating hover color on click when cursor doesn't move and doesn't trigger hover update
@@ -72,6 +87,25 @@ function hoverSquareClick(){
                 }
             }
         });
+        upperEl.forEach(function(f) {
+            if (f.getAttribute('id') === hover.toString()[1]&&playerTurn===1) {
+                f.classList.remove('p1hover')
+                f.classList.remove('p2hover')
+                f.classList.remove('square')
+                f.classList.add('p1hover')
+            }
+            if (f.getAttribute('id') === hover.toString()[1]&&playerTurn===-1) {
+                f.classList.remove('p1hover')
+                f.classList.remove('p2hover')
+                f.classList.remove('square')
+                f.classList.add('p2hover')            
+            }
+            // if(f.getAttribute('id') != hover.toString()[1]) {
+            //     f.classList.remove('p1hover');
+            //     f.classList.remove('p2hover');
+            //     f.classList.add('square');
+            // }
+        })
     }
 }
 
