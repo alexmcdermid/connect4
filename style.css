@@ -1,6 +1,13 @@
 body {
     background-color:lightsteelblue;
 }
+.title {
+    display:flex; 
+    width:660px; 
+    height: 92px;
+    font-size: 64px;
+    justify-content: center;
+}
 .board { 
     border: 1px solid black; 
     display:flex; 
