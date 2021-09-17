@@ -100,11 +100,6 @@ function hoverSquareClick(){
                 f.classList.remove('square')
                 f.classList.add('p2hover')            
             }
-            // if(f.getAttribute('id') != hover.toString()[1]) {
-            //     f.classList.remove('p1hover');
-            //     f.classList.remove('p2hover');
-            //     f.classList.add('square');
-            // }
         })
     }
 }
