@@ -481,7 +481,13 @@ function reset() {
     squares.forEach(function(e) {
         e.classList.replace('p1','square');
         e.classList.replace('p2','square');
+        e.classList.replace('p1hover','square')
+        e.classList.replace('p2hover','square')
     });
+    upperEl.forEach(function(f) {
+        f.classList.replace('p1hover','square')
+        f.classList.replace('p2hover','square')
+    })
     playerTurn = 1;
     playerTurnEl.innerText = "Player Turn: "+playerTurn;
     messageEl.innerText = "";
